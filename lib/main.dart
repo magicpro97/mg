@@ -6,7 +6,9 @@ import 'app.dart';
 
 void main() async {
   var delegate = await LocalizationDelegate.create(
-      fallbackLocale: 'en', supportedLocales: ['en']);
+    fallbackLocale: 'en',
+    supportedLocales: ['en'],
+  );
 
   runApp(LocalizedApp(delegate, App()));
 }

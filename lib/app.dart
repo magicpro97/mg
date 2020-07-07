@@ -21,17 +21,20 @@ class App extends StatelessWidget {
         blocs: [
           authenticationBlocComponent(),
         ],
-        child: MaterialApp(
-          title: translate(I18n.APP_NAME),
-          theme: AppTheme.defaultTheme,
-          localizationsDelegates: [
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            localizationDelegate
-          ],
-          supportedLocales: localizationDelegate.supportedLocales,
-          locale: localizationDelegate.currentLocale,
-          onGenerateRoute: routes(),
+        child: LocalizationProvider(
+          state: LocalizationProvider.of(context).state,
+          child: MaterialApp(
+            title: translate(I18n.APP_NAME),
+            theme: AppTheme.defaultTheme,
+            localizationsDelegates: [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              localizationDelegate
+            ],
+            supportedLocales: localizationDelegate.supportedLocales,
+            locale: localizationDelegate.currentLocale,
+            onGenerateRoute: routes(),
+          ),
         ),
       ),
     );

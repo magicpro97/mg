@@ -1,3 +1,8 @@
 {
-  "app_name": "MG"
+  "app_name": "MG",
+  "txt_user_name": "Username",
+  "txt_password": "Password",
+  "txt_forgot_password": "Forgot password?",
+  "txt_sign_up": "Sign up",
+  "txt_log_in": "Log in"
 }

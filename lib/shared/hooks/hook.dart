@@ -1,8 +1,7 @@
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
-import '../../features/screen.dart';
+import 'package:mg/features/login/login_screen.dart';
 
 void useAddFrameCallbackForFlashScreenHook() {
   use(_AddFrameCallbackForFlashScreenHook());
@@ -19,7 +18,7 @@ class _FrameCallbackState
   void initHook() {
     super.initHook();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      Navigator.pushReplacementNamed(context, HomeScreen.route);
+      Navigator.pushReplacementNamed(context, LoginScreen.route);
     });
   }
 
