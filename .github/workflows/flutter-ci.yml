@@ -30,8 +30,13 @@ jobs:
         # Check for any formatting issues in the code.
       - run: flutter format --set-exit-if-changed .
 
+        # Generate necessary files
+      - run: flutter packages run build_runner build
+
         # Statically analyze the Dart code for any errors.
       - run: flutter analyze .
 
         # Build apk.
       - run: flutter build apk
+
+        # TODO: Upload artifacts
