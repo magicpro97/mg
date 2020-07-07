@@ -35,3 +35,5 @@ jobs:
 
         # Build apk.
       - run: flutter build apk
+
+        # TODO: Upload artifacts
