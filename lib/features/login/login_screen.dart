@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_statusbar_text_color/flutter_statusbar_text_color.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:mg/shared/widgets/clickable_image.dart';
-import 'package:mg/style/dimen.dart';
 
 import '../../i18n/i18n.dart';
 import '../../shared/constants/image_paths.dart';
+import '../../shared/widgets/clickable_image.dart';
 import '../../shared/widgets/clickable_text.dart';
 import '../../shared/widgets/rounded_button.dart';
 import '../../style/color.dart';
+import '../../style/dimen.dart';
 
 class LoginScreen extends HookWidget {
   static const String route = '/login';
