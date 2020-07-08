@@ -4,8 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'features/change_password/change_password_screen.dart';
 import 'features/home/bloc/home_bloc.dart';
 import 'features/login/login_screen.dart';
-import 'features/register/register_vehicle_screen.dart';
 import 'features/register/sign_up_screen.dart';
+import 'features/register_vehicle/register_vehicle_screen.dart';
+import 'features/reset_password/forgot_password_screen.dart';
 import 'features/screen.dart';
 
 var bootStage = 1;
@@ -41,6 +42,9 @@ RouteFactory routes() {
         break;
       case ChangePasswordScreen.route:
         screen = ChangePasswordScreen();
+        break;
+      case ForgotPasswordScreen.route:
+        screen = ForgotPasswordScreen();
         break;
     }
 
