@@ -34,7 +34,7 @@ class RegisterVehicleScreen extends StatelessWidget {
               Image.asset(ImagePaths.IC_VERIFICATION),
               SizedBox(height: Dimen.SPACE_X2),
               UnderlineTextField(
-                prefixIcon: Image.asset(ImagePaths.IC_REG_NO),
+                prefixIcon: Icon(Icons.directions_car),
                 hintText: translate(I18n.TXT_REG_NO),
               ),
               SizedBox(height: Dimen.SPACE_X1),
