@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mg/features/login/login_screen.dart';
 
 import 'features/home/bloc/home_bloc.dart';
 import 'features/screen.dart';
@@ -18,6 +19,9 @@ RouteFactory routes() {
 
     // final arguments = settings.arguments as Map<String, dynamic> ?? {};
     switch (settings.name) {
+      case LoginScreen.route:
+        screen = LoginScreen();
+        break;
       case HomeScreen.route:
         screen = BlocProvider(
           create: (BuildContext context) {
