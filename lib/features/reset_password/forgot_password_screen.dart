@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:mg/i18n/i18n.dart';
-import 'package:mg/shared/constants/image_paths.dart';
-import 'package:mg/shared/widgets/base_screen.dart';
-import 'package:mg/shared/widgets/rounded_button.dart';
-import 'package:mg/shared/widgets/underline_text_field.dart';
-import 'package:mg/style/color.dart';
-import 'package:mg/style/dimen.dart';
+
+import '../../i18n/i18n.dart';
+import '../../shared/constants/image_paths.dart';
+import '../../shared/widgets/base_screen.dart';
+import '../../shared/widgets/rounded_button.dart';
+import '../../shared/widgets/underline_text_field.dart';
+import '../../style/color.dart';
+import '../../style/dimen.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   static const route = '/forgot_password';
