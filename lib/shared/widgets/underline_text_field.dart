@@ -13,7 +13,7 @@ class UnderlineTextField extends StatelessWidget {
   const UnderlineTextField({
     Key key,
     this.hintTextStyle,
-    @required this.prefixIcon,
+    this.prefixIcon,
     this.keyboardType,
     @required this.hintText,
     this.obscureText = false,

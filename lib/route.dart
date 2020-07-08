@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/change_password/change_password_screen.dart';
 import 'features/home/bloc/home_bloc.dart';
 import 'features/login/login_screen.dart';
 import 'features/register/register_vehicle_screen.dart';
@@ -37,6 +38,9 @@ RouteFactory routes() {
         break;
       case RegisterVehicleScreen.route:
         screen = RegisterVehicleScreen();
+        break;
+      case ChangePasswordScreen.route:
+        screen = ChangePasswordScreen();
         break;
     }
 

@@ -15,5 +15,9 @@
   "txt_policy_no": "Policy No.",
   "txt_skip": "Skip",
   "txt_reset_password": "Reset Password",
-  "txt_reset_password_instruction": "Please input your email to reset password."
+  "txt_reset_password_instruction": "Please input your email to reset password.",
+  "txt_change_password": "Change Password",
+  "txt_current_password": "Current password",
+  "txt_new_password": "New password",
+  "txt_save": "Save"
 }
