@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mg/features/login/login_screen.dart';
 
 import 'features/home/bloc/home_bloc.dart';
+import 'features/login/login_screen.dart';
+import 'features/register/sign_up_screen.dart';
 import 'features/screen.dart';
 
 var bootStage = 1;
@@ -29,6 +30,9 @@ RouteFactory routes() {
           },
           child: HomeScreen(),
         );
+        break;
+      case SignUpScreen.route:
+        screen = SignUpScreen();
         break;
     }
 

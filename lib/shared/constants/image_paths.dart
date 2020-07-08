@@ -5,9 +5,23 @@ class ImagePaths {
 
   static const LOGO = '$IMAGE_ASSETS/logo.png';
 
-  static const CALL_IC = '$IMAGE_ASSETS/call_ic.png';
+  static const IC_CALL = '$IMAGE_ASSETS/call_ic.png';
 
-  static const EMAIL_IC = '$IMAGE_ASSETS/email.png';
+  static const IC_EMAIL_WHITE = '$IMAGE_ASSETS/email.png';
 
-  static const PW_IC = '$IMAGE_ASSETS/pw_ic.png';
+  static const IC_EMAIL_BLACK = '$IMAGE_ASSETS/email_black.png';
+
+  static const IC_PW = '$IMAGE_ASSETS/pw_ic.png';
+
+  static const IC_PW_BLACK = '$IMAGE_ASSETS/pw_black.png';
+
+  static const IC_MOBILE = '$IMAGE_ASSETS/mobile.png';
+
+  static const IC_RE_PW = '$IMAGE_ASSETS/re_pw.png';
+
+  static const IC_VERIFY = '$IMAGE_ASSETS/verification.png';
+
+  static const IC_DONE_BLACK = '$IMAGE_ASSETS/done_back.png';
+
+  static const IC_USER = '$IMAGE_ASSETS/username.png';
 }

@@ -1,9 +1,9 @@
 class Dimen {
-  static const NORMAL_SPACE = 10.0;
+  static const SPACE_X1 = 10.0;
 
-  static const LARGE_SPACE = NORMAL_SPACE * 2;
+  static const SPACE_X2 = SPACE_X1 * 2;
 
-  static const LARGER_SPACE = LARGE_SPACE * 2;
+  static const SPACE_X3 = SPACE_X2 * 2;
 
   static const BUTTON_BORDER_RADIUS = 8.0;
 

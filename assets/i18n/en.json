@@ -4,5 +4,10 @@
   "txt_password": "Password",
   "txt_forgot_password": "Forgot password?",
   "txt_sign_up": "Sign up",
-  "txt_log_in": "Log in"
+  "txt_log_in": "Log in",
+  "txt_register": "Register",
+  "txt_email_address": "Email address",
+  "txt_phone": "Phone",
+  "txt_confirm_password": "Confirm password",
+  "txt_required_information": "Required information"
 }
