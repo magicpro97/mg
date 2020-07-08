@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:mg/shared/widgets/base_screen.dart';
 
 import '../../i18n/i18n.dart';
 import '../../shared/constants/image_paths.dart';
@@ -12,40 +13,29 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: AppColor.PRIMARY,
-      child: Scaffold(
-        backgroundColor: AppColor.PRIMARY,
-        body: SafeArea(
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  IconButton(
-                      icon: Icon(
-                        Icons.close,
-                        color: AppColor.BLACK,
-                      ),
-                      onPressed: () {}),
-                  Text(
-                    translate(I18n.TXT_REGISTER),
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                  IconButton(
-                      icon: Icon(
-                        Icons.check,
-                        color: AppColor.BLACK,
-                      ),
-                      onPressed: () {}),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: Dimen.SPACE_X2),
-                child: _registerForm(context),
-              ),
-            ],
+    return BaseScreen(
+      title: translate(I18n.TXT_REGISTER),
+      leading: IconButton(
+        icon: Icon(
+          Icons.close,
+          color: AppColor.BLACK,
+        ),
+        onPressed: () {},
+      ),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(
+            Icons.close,
+            color: AppColor.BLACK,
           ),
+          onPressed: () {},
+        ),
+      ],
+      child: SafeArea(
+        child: Container(
+          color: AppColor.PRIMARY,
+          padding: const EdgeInsets.symmetric(horizontal: Dimen.SPACE_X2),
+          child: _registerForm(context),
         ),
       ),
     );
@@ -54,7 +44,6 @@ class SignUpScreen extends StatelessWidget {
   Widget _registerForm(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Padding(
           padding: const EdgeInsets.symmetric(

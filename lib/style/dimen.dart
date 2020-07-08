@@ -8,4 +8,6 @@ class Dimen {
   static const BUTTON_BORDER_RADIUS = 8.0;
 
   static const BUTTON_HEIGHT = 48.0;
+
+  static const ELEVATION_APPBAR = 0.0;
 }
