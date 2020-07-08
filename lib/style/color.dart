@@ -5,5 +5,7 @@ class AppColor {
 
   static const BLACK = Colors.black;
 
-  static const TRANSPARENT = Colors.transparent;
+  static const TRANSPARENT = Colors.black;
+
+  static const PRIMARY = Color(0xFFFFC20F);
 }
