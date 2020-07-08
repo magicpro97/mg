@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_statusbar_text_color/flutter_statusbar_text_color.dart';
@@ -8,6 +10,7 @@ import '../../shared/constants/image_paths.dart';
 import '../../shared/widgets/clickable_image.dart';
 import '../../shared/widgets/clickable_text.dart';
 import '../../shared/widgets/rounded_button.dart';
+import '../../shared/widgets/underline_text_field.dart';
 import '../../style/color.dart';
 import '../../style/dimen.dart';
 
@@ -17,7 +20,9 @@ class LoginScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     useEffect(() {
-      FlutterStatusbarTextColor.setTextColor(FlutterStatusbarTextColor.light);
+      if (Platform.isIOS) {
+        FlutterStatusbarTextColor.setTextColor(FlutterStatusbarTextColor.light);
+      }
 
       return null;
     });
@@ -43,12 +48,12 @@ class LoginScreen extends HookWidget {
               SizedBox(height: Dimen.LARGER_SPACE),
               _TextField(
                   hintText: translate(I18n.TXT_USER_NAME),
-                  prefixIcon: Image.asset(ImagePaths.EMAIL_IC),
+                  prefixIcon: Image.asset(ImagePaths.IC_EMAIL_WHITE),
                   keyboardType: TextInputType.emailAddress),
               SizedBox(height: Dimen.NORMAL_SPACE),
               _TextField(
                 hintText: translate(I18n.TXT_PASSWORD),
-                prefixIcon: Image.asset(ImagePaths.PW_IC),
+                prefixIcon: Image.asset(ImagePaths.IC_PW),
                 keyboardType: TextInputType.text,
                 obscureText: true,
               ),
@@ -86,7 +91,7 @@ class LoginScreen extends HookWidget {
                 ],
               ),
               Spacer(),
-              ClickableImage(image: Image.asset(ImagePaths.CALL_IC)),
+              ClickableImage(image: Image.asset(ImagePaths.IC_CALL)),
             ],
           ),
         ),
@@ -111,23 +116,14 @@ class _TextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      style: TextStyle(color: AppColor.WHITE),
-      decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: TextStyle(
-          color: AppColor.WHITE,
-        ),
-        prefixIcon: prefixIcon,
-        enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColor.WHITE),
-        ),
-        border: UnderlineInputBorder(
-          borderSide: BorderSide(color: AppColor.WHITE),
-        ),
-      ),
+    return UnderlineTextField(
+      contentTextStyle: TextStyle(color: AppColor.WHITE),
+      hintText: hintText,
+      hintTextStyle: TextStyle(color: AppColor.WHITE),
       keyboardType: keyboardType,
       obscureText: obscureText,
+      underlineColor: AppColor.WHITE,
+      prefixIcon: prefixIcon,
     );
   }
 }
