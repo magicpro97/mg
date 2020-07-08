@@ -19,5 +19,7 @@
   "txt_change_password": "Change Password",
   "txt_current_password": "Current password",
   "txt_new_password": "New password",
-  "txt_save": "Save"
+  "txt_save": "Save",
+  "txt_reset_password_hint": "Enter email",
+  "txt_submit": "Submit"
 }
