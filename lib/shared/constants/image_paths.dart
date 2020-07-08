@@ -24,4 +24,10 @@ class ImagePaths {
   static const IC_DONE_BLACK = '$IMAGE_ASSETS/done_back.png';
 
   static const IC_USER = '$IMAGE_ASSETS/username.png';
+
+  static const IC_RESET_PW = '$IMAGE_ASSETS/reset_pw.png';
+
+  static const IC_VERIFICATION = '$IMAGE_ASSETS/verification.png';
+
+  static const IC_REG_NO = '$IMAGE_ASSETS/reg_no_ic.png';
 }

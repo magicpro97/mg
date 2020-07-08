@@ -18,7 +18,7 @@ class UnderlineTextField extends StatelessWidget {
     @required this.hintText,
     this.obscureText = false,
     this.contentTextStyle,
-    @required this.underlineColor,
+    this.underlineColor,
     this.onTextChange,
   }) : super(key: key);
 
@@ -31,10 +31,10 @@ class UnderlineTextField extends StatelessWidget {
         hintStyle: hintTextStyle,
         prefixIcon: prefixIcon,
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: underlineColor),
+          borderSide: BorderSide(color: underlineColor ?? Colors.black),
         ),
         border: UnderlineInputBorder(
-          borderSide: BorderSide(color: underlineColor),
+          borderSide: BorderSide(color: underlineColor ?? Colors.black),
         ),
       ),
       keyboardType: keyboardType,
