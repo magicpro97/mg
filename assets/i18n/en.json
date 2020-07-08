@@ -9,5 +9,11 @@
   "txt_email_address": "Email address",
   "txt_phone": "Phone",
   "txt_confirm_password": "Confirm password",
-  "txt_required_information": "Required information"
+  "txt_required_information": "Required information",
+  "txt_register_information": "Register Information",
+  "txt_reg_no": "Reg No.",
+  "txt_policy_no": "Policy No.",
+  "txt_skip": "Skip",
+  "txt_reset_password": "Reset Password",
+  "txt_reset_password_instruction": "Please input your email to reset password."
 }

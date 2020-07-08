@@ -33,7 +33,10 @@ class RoundedButton extends StatelessWidget {
               border: Border.all(color: borderColor)),
           child: Text(
             this.label.toUpperCase(),
-            style: TextStyle(color: labelColor),
+            style: TextStyle(
+              color: labelColor,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ),

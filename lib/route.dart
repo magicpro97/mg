@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/home/bloc/home_bloc.dart';
 import 'features/login/login_screen.dart';
+import 'features/register/register_vehicle_screen.dart';
 import 'features/register/sign_up_screen.dart';
 import 'features/screen.dart';
 
@@ -33,6 +34,9 @@ RouteFactory routes() {
         break;
       case SignUpScreen.route:
         screen = SignUpScreen();
+        break;
+      case RegisterVehicleScreen.route:
+        screen = RegisterVehicleScreen();
         break;
     }
 
