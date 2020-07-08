@@ -14,7 +14,6 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: AppColor.PRIMARY,
-      padding: const EdgeInsets.symmetric(horizontal: Dimen.LARGE_SPACE),
       child: Scaffold(
         backgroundColor: AppColor.PRIMARY,
         body: SafeArea(
@@ -28,7 +27,7 @@ class SignUpScreen extends StatelessWidget {
                         Icons.close,
                         color: AppColor.BLACK,
                       ),
-                      onPressed: null),
+                      onPressed: () {}),
                   Text(
                     translate(I18n.TXT_REGISTER),
                     style: Theme.of(context).textTheme.headline6,
@@ -38,45 +37,67 @@ class SignUpScreen extends StatelessWidget {
                         Icons.check,
                         color: AppColor.BLACK,
                       ),
-                      onPressed: null),
+                      onPressed: () {}),
                 ],
               ),
-              Text(''),
-              _TextField(
-                hintText: translate(I18n.TXT_USER_NAME),
-                prefixIcon: Icon(
-                  Icons.person,
-                  color: AppColor.BLACK,
-                ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Dimen.SPACE_X2),
+                child: _registerForm(context),
               ),
-              _TextField(
-                hintText: translate(I18n.TXT_PHONE),
-                prefixIcon: Icon(
-                  Icons.phone_android,
-                  color: AppColor.BLACK,
-                ),
-              ),
-              _TextField(
-                hintText: translate(I18n.TXT_EMAIL_ADDRESS),
-                prefixIcon: Icon(
-                  Icons.email,
-                  color: AppColor.BLACK,
-                ),
-              ),
-              _TextField(
-                hintText: translate(I18n.TXT_PASSWORD),
-                prefixIcon: Image.asset(ImagePaths.IC_PW_BLACK),
-                isPassword: true,
-              ),
-              _TextField(
-                hintText: translate(I18n.TXT_CONFIRM_PASSWORD),
-                prefixIcon: Image.asset(ImagePaths.IC_RE_PW),
-                isPassword: true,
-              )
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _registerForm(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: Dimen.SPACE_X1,
+            vertical: Dimen.SPACE_X2,
+          ),
+          child: Text(
+            translate(I18n.TXT_REQUIRED_INFORMATION).toUpperCase(),
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        ),
+        _TextField(
+          hintText: translate(I18n.TXT_USER_NAME),
+          prefixIcon: Icon(
+            Icons.person,
+            color: AppColor.BLACK,
+          ),
+        ),
+        _TextField(
+          hintText: translate(I18n.TXT_PHONE),
+          prefixIcon: Icon(
+            Icons.phone_android,
+            color: AppColor.BLACK,
+          ),
+        ),
+        _TextField(
+          hintText: translate(I18n.TXT_EMAIL_ADDRESS),
+          prefixIcon: Icon(
+            Icons.email,
+            color: AppColor.BLACK,
+          ),
+        ),
+        _TextField(
+          hintText: translate(I18n.TXT_PASSWORD),
+          prefixIcon: Image.asset(ImagePaths.IC_PW_BLACK),
+          isPassword: true,
+        ),
+        _TextField(
+          hintText: translate(I18n.TXT_CONFIRM_PASSWORD),
+          prefixIcon: Image.asset(ImagePaths.IC_RE_PW),
+          isPassword: true,
+        ),
+      ],
     );
   }
 }
@@ -98,7 +119,7 @@ class _TextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: Dimen.NORMAL_SPACE),
+      padding: const EdgeInsets.only(bottom: Dimen.SPACE_X1),
       child: UnderlineTextField(
         hintText: hintText,
         prefixIcon: prefixIcon,

@@ -35,29 +35,29 @@ class LoginScreen extends HookWidget {
             fit: BoxFit.fill,
           ),
         ),
-        padding: const EdgeInsets.symmetric(horizontal: Dimen.LARGE_SPACE),
+        padding: const EdgeInsets.symmetric(horizontal: Dimen.SPACE_X2),
         child: SafeArea(
           child: Column(
             children: <Widget>[
-              SizedBox(height: Dimen.LARGER_SPACE),
+              SizedBox(height: Dimen.SPACE_X3),
               Image.asset(
                 ImagePaths.LOGO,
                 width: 150,
                 height: 150,
               ),
-              SizedBox(height: Dimen.LARGER_SPACE),
+              SizedBox(height: Dimen.SPACE_X3),
               _TextField(
                   hintText: translate(I18n.TXT_USER_NAME),
                   prefixIcon: Image.asset(ImagePaths.IC_EMAIL_WHITE),
                   keyboardType: TextInputType.emailAddress),
-              SizedBox(height: Dimen.NORMAL_SPACE),
+              SizedBox(height: Dimen.SPACE_X1),
               _TextField(
                 hintText: translate(I18n.TXT_PASSWORD),
                 prefixIcon: Image.asset(ImagePaths.IC_PW),
                 keyboardType: TextInputType.text,
                 obscureText: true,
               ),
-              SizedBox(height: Dimen.LARGER_SPACE),
+              SizedBox(height: Dimen.SPACE_X3),
               RoundedButton(
                 label: translate(I18n.TXT_LOG_IN),
                 backgroundColor: AppColor.TRANSPARENT,
@@ -65,7 +65,7 @@ class LoginScreen extends HookWidget {
                 labelColor: AppColor.WHITE,
                 onPress: () {},
               ),
-              SizedBox(height: Dimen.LARGER_SPACE),
+              SizedBox(height: Dimen.SPACE_X3),
               Stack(
                 alignment: Alignment.center,
                 children: [

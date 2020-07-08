@@ -8,5 +8,6 @@
   "txt_register": "Register",
   "txt_email_address": "Email address",
   "txt_phone": "Phone",
-  "txt_confirm_password": "Confirm password"
+  "txt_confirm_password": "Confirm password",
+  "txt_required_information": "Required information"
 }
