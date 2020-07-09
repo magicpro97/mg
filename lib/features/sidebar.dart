@@ -10,7 +10,7 @@ import '../style/dimen.dart';
 final menu = [
   I18n.TXT_REQUEST_SUPPORT,
   I18n.TXT_REGISTER_VEHICLE,
-  I18n.TXT_ACCOUNT,
+  I18n.TXT_ACCOUNT_INFORMATION,
   I18n.TXT_SIGN_OUT,
 ].map((e) => translate(e)).toList();
 

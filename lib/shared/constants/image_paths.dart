@@ -36,4 +36,6 @@ class ImagePaths {
   static const IC_SUCCESS = '$IMAGE_ASSETS/success.png';
 
   static const IC_CANCEL = '$IMAGE_ASSETS/cancelling.png';
+
+  static const BG_ACCOUNT = '$IMAGE_ASSETS/bg.png';
 }
