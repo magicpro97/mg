@@ -27,5 +27,9 @@
   "txt_feedback_instruction": "Hope you like this request. Please help us improve quality service by rating and making feedback to us.",
   "txt_cancel": "Cancel",
   "txt_cancel_title": "Why did you cancel request?",
-  "txt_cancel_instruction": "Your feedback gives us great opportunity."
+  "txt_cancel_instruction": "Your feedback gives us great opportunity.",
+  "txt_request_support": "Request support",
+  "txt_register_vehicle": "Register vehicle",
+  "txt_account": "Account",
+  "txt_sign_out": "Sign out"
 }
