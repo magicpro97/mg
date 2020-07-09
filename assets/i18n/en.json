@@ -24,5 +24,8 @@
   "txt_submit": "Submit",
   "txt_thank_you": "Thank you",
   "txt_thank_you_exclamation": "Thank you!",
-  "txt_feedback_instruction": "Hope you like this request. Please help us improve quality service by rating and making feedback to us."
+  "txt_feedback_instruction": "Hope you like this request. Please help us improve quality service by rating and making feedback to us.",
+  "txt_cancel": "Cancel",
+  "txt_cancel_title": "Why did you cancel request?",
+  "txt_cancel_instruction": "Your feedback gives us great opportunity."
 }
