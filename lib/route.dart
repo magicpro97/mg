@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/change_password/change_password_screen.dart';
+import 'features/feedback/feedback_screen.dart';
 import 'features/home/bloc/home_bloc.dart';
 import 'features/login/login_screen.dart';
 import 'features/register/sign_up_screen.dart';
@@ -45,6 +46,9 @@ RouteFactory routes() {
         break;
       case ForgotPasswordScreen.route:
         screen = ForgotPasswordScreen();
+        break;
+      case FeedbackScreen.route:
+        screen = FeedbackScreen();
         break;
     }
 

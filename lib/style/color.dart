@@ -8,4 +8,10 @@ class AppColor {
   static const TRANSPARENT = Colors.transparent;
 
   static const PRIMARY = Color(0xFFFFC20F);
+
+  static const GRAY_F9F9F9 = Color(0xFFF9F9F9);
+
+  static const GREEN_3BB54A = Color(0xFF3BB54A);
+
+  static const YELLOW = Colors.yellow;
 }
