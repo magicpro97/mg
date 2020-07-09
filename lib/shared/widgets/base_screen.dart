@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mg/style/dimen.dart';
+
+import '../../features/sidebar.dart';
+import '../../style/dimen.dart';
 
 class BaseScreen extends StatelessWidget {
   final Widget leading;
@@ -21,7 +23,7 @@ class BaseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
-        drawer: enableDrawer ? Drawer() : null,
+        drawer: enableDrawer ? Sidebar() : null,
         appBar: AppBar(
           elevation: Dimen.ELEVATION_APPBAR,
           title: Text(title),
