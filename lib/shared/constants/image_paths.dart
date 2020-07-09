@@ -32,4 +32,6 @@ class ImagePaths {
   static const IC_REG_NO = '$IMAGE_ASSETS/reg_no_ic.png';
 
   static const IC_CHANGE_PW = '$IMAGE_ASSETS/change_pw.png';
+
+  static const IC_SUCCESS = '$IMAGE_ASSETS/success.png';
 }

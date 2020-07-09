@@ -21,5 +21,8 @@
   "txt_new_password": "New password",
   "txt_save": "Save",
   "txt_reset_password_hint": "Enter email",
-  "txt_submit": "Submit"
+  "txt_submit": "Submit",
+  "txt_thank_you": "Thank you",
+  "txt_thank_you_exclamation": "Thank you!",
+  "txt_feedback_instruction": "Hope you like this request. Please help us improve quality service by rating and making feedback to us."
 }
