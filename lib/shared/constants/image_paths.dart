@@ -34,4 +34,6 @@ class ImagePaths {
   static const IC_CHANGE_PW = '$IMAGE_ASSETS/change_pw.png';
 
   static const IC_SUCCESS = '$IMAGE_ASSETS/success.png';
+
+  static const IC_CANCEL = '$IMAGE_ASSETS/cancelling.png';
 }
