@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mg/features/cancel/cancel_screen.dart';
 
 import 'features/change_password/change_password_screen.dart';
 import 'features/feedback/feedback_screen.dart';
@@ -49,6 +50,9 @@ RouteFactory routes() {
         break;
       case FeedbackScreen.route:
         screen = FeedbackScreen();
+        break;
+      case CancelScreen.route:
+        screen = CancelScreen();
         break;
     }
 
