@@ -11,6 +11,7 @@ import 'features/register/sign_up_screen.dart';
 import 'features/register_vehicle/register_vehicle_screen.dart';
 import 'features/reset_password/forgot_password_screen.dart';
 import 'features/screen.dart';
+import 'features/waiting/waiting_screen.dart';
 
 var bootStage = 1;
 
@@ -57,6 +58,9 @@ RouteFactory routes() {
         break;
       case AccountScreen.route:
         screen = AccountScreen();
+        break;
+      case WaitingScreen.route:
+        screen = WaitingScreen();
         break;
     }
 
