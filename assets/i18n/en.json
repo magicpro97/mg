@@ -41,5 +41,6 @@
   "txt_request_status_instruction": "Our agents is coming up to you",
   "txt_workshop": "Workshop",
   "txt_about_km": "{km}km(s) about",
-  "txt_done": "Done"
+  "txt_done": "Done",
+  "txt_note": "Note"
 }
