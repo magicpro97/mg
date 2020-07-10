@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:mg/i18n/i18n.dart';
-import 'package:mg/shared/widgets/v_icon_button.dart';
-import 'package:mg/style/color.dart';
-import 'package:mg/style/dimen.dart';
+
+import '../../../i18n/i18n.dart';
+import '../../../shared/widgets/v_icon_button.dart';
+import '../../../style/color.dart';
+import '../../../style/dimen.dart';
 
 class TopBar extends StatelessWidget {
   final Function(String) onRegNoChange;

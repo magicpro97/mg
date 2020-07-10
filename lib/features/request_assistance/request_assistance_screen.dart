@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-import 'package:mg/features/request_assistance/widgets/top_bar.dart';
-import 'package:mg/i18n/i18n.dart';
-import 'package:mg/shared/widgets/base_screen.dart';
-import 'package:mg/style/dimen.dart';
+
+import '../../features/request_assistance/widgets/top_bar.dart';
+import '../../i18n/i18n.dart';
+import '../../shared/widgets/base_screen.dart';
+import '../../style/dimen.dart';
+import 'widgets/map.dart';
 
 class RequestAssistanceScreen extends StatelessWidget {
   static const route = '/request_assistance';
@@ -27,6 +29,9 @@ class RequestAssistanceScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             TopBar(),
+            Expanded(
+              child: MapView(),
+            ),
           ],
         ),
       ),
