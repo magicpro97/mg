@@ -9,6 +9,7 @@ import 'features/home/bloc/home_bloc.dart';
 import 'features/login/login_screen.dart';
 import 'features/register/sign_up_screen.dart';
 import 'features/register_vehicle/register_vehicle_screen.dart';
+import 'features/request_status/request_status_screen.dart';
 import 'features/reset_password/forgot_password_screen.dart';
 import 'features/screen.dart';
 import 'features/waiting/waiting_screen.dart';
@@ -61,6 +62,9 @@ RouteFactory routes() {
         break;
       case WaitingScreen.route:
         screen = WaitingScreen();
+        break;
+      case RequestStatusScreen.route:
+        screen = RequestStatusScreen();
         break;
     }
 
