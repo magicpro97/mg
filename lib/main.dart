@@ -4,9 +4,10 @@ import 'package:flutter_translate/localization_delegate.dart';
 import 'package:flutter_translate/localized_app.dart';
 
 import 'app.dart';
+import 'shared/constants/keys.dart';
 
 void main() async {
-  GoogleMap.init('AIzaSyB1XA-NjRkGZeDEPJ02IgIQHrz-iW1wZLc');
+  GoogleMap.init(Keys.GOOGLE_MAP);
 
   WidgetsFlutterBinding.ensureInitialized();
 
