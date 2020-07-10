@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mg/features/request_assistance/request_assistance_screen.dart';
 
 import 'features/account/account_screen.dart';
 import 'features/cancel/cancel_screen.dart';
@@ -65,6 +66,9 @@ RouteFactory routes() {
         break;
       case RequestStatusScreen.route:
         screen = RequestStatusScreen();
+        break;
+      case RequestAssistanceScreen.route:
+        screen = RequestAssistanceScreen();
         break;
     }
 

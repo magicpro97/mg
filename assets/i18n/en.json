@@ -42,5 +42,14 @@
   "txt_workshop": "Workshop",
   "txt_about_km": "{km}km(s) about",
   "txt_done": "Done",
-  "txt_note": "Note"
+  "txt_note": "Note",
+  "txt_input_reg_no": "Input Reg No.",
+  "txt_current_location": "Current Location",
+  "txt_camera": "Camera",
+  "txt_image": "Image",
+  "txt_cash": "Cash",
+  "txt_try_again": "Try Again",
+  "txt_error": "Error",
+  "txt_request_assistance": "Request Assistance",
+  "txt_input_current_location": "Input Current Location"
 }
