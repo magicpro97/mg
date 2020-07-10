@@ -32,5 +32,9 @@
   "txt_register_vehicle": "Register vehicle",
   "txt_account_information": "Account Information",
   "txt_sign_out": "Sign out",
-  "txt_delete": "Delete"
+  "txt_delete": "Delete",
+  "txt_waiting_title": "Your request is submitted",
+  "txt_request_id": "Request ID: {id}",
+  "txt_please_wait": "Please wait...",
+  "txt_wait_instruction": "Our agents will contact soon."
 }

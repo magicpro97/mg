@@ -4,12 +4,14 @@ class ClickableText extends StatelessWidget {
   final Function onPress;
   final String text;
   final Color color;
+  final FontWeight fontWeight;
 
   const ClickableText({
     Key key,
     this.onPress,
     @required this.text,
     this.color,
+    this.fontWeight = FontWeight.w400,
   }) : super(key: key);
 
   @override
@@ -18,7 +20,10 @@ class ClickableText extends StatelessWidget {
       onTap: onPress,
       child: Text(
         text,
-        style: TextStyle(color: color),
+        style: TextStyle(
+          color: color,
+          fontWeight: fontWeight,
+        ),
       ),
     );
   }
