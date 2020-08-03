@@ -21,4 +21,8 @@ class User extends BaseModel {
 
   @override
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [username];
 }
