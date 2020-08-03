@@ -14,14 +14,11 @@ class User extends BaseModel {
     this.username,
     DateTime createdDate,
     DateTime updatedDate,
-  }) : super(
-          id: id,
-          createdDate: createdDate ?? DateTime.now(),
-          updatedDate: updatedDate ?? DateTime.now(),
-        );
+  });
 
   @override
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
+  @override
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 }
