@@ -29,7 +29,10 @@ class UserServiceImpl extends UserService {
   }) =>
       _dio
           .get('')
-          .then((value) => BaseResponse(value.data).data)
+          .then((value) => BaseResponse.fromJson(
+                value.data,
+                (json) => LoginResponse.fromJson(json),
+              ).data)
           .catchError((error) => Result.error(error));
 
   @override
