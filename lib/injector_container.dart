@@ -24,9 +24,11 @@ void setup() async {
       () => EncryptedStorage(getIt.get(instanceName: 'cachedBox')));
 
   getIt.registerLazySingleton(() {
-    final dio = Dio(BaseOptions(
-      baseUrl: Api.BASE_URL,
-    ));
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: Api.BASE_URL,
+      ),
+    );
 
     dio.interceptors.addAll([
       LogInterceptor(

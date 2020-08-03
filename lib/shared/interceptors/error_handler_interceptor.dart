@@ -57,11 +57,44 @@ class ErrorHandlerInterceptor extends Interceptor {
           case 404:
             httpError = HttpError.notFound();
             break;
+          case 500:
+            break;
           default:
             httpError = HttpError.internalServer();
         }
         break;
     }
     return _dio.reject(Error.server(httpError: httpError));
+  }
+
+  HttpError getError(DioError error) {
+    switch (error.type) {
+      case DioErrorType.CONNECT_TIMEOUT:
+        return HttpError.connectTimeOut();
+      case DioErrorType.SEND_TIMEOUT:
+        return HttpError.sendTimeOut();
+      case DioErrorType.RECEIVE_TIMEOUT:
+        return HttpError.receiveTimeOut();
+      case DioErrorType.RESPONSE:
+        return HttpError.response();
+      case DioErrorType.CANCEL:
+        return HttpError.cancel();
+      case DioErrorType.DEFAULT:
+        switch (error.response.statusCode) {
+          case 400:
+            return HttpError.badRequest();
+          case 401:
+            return HttpError.unAuthorized();
+          case 403:
+            return HttpError.forbidden();
+          case 404:
+            return HttpError.notFound();
+          case 500:
+            return HttpError.internalServer();
+          default:
+            return HttpError.internalServer();
+        }
+        break;
+    }
   }
 }

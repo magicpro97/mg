@@ -1,4 +1,4 @@
-import 'package:mg/data/models/login_response.dart';
+import 'package:mg/data/models/response/login_response.dart';
 import 'package:mg/data/sources/cache/encrypted_storage.dart';
 import 'package:mg/data/sources/remote/user_service.dart';
 
@@ -6,7 +6,7 @@ import '../../core/repositories/base_repository.dart';
 import '../models/user.dart';
 
 abstract class UserRepository extends BaseRepository<User> {
-  Future<User> login(String username, String password);
+  Future<User> login({String username, String password});
 }
 
 class UserRepositoryImpl extends UserRepository {
@@ -16,8 +16,11 @@ class UserRepositoryImpl extends UserRepository {
   UserRepositoryImpl(this._userService, this._encryptedStorage);
 
   @override
-  Future<User> login(String username, String password) async {
-    final result = await _userService.login(username, password);
+  Future<User> login({String username, String password}) async {
+    final result = await _userService.login(
+      username: username,
+      password: password,
+    );
 
     return result.maybeWhen(
       success: (result) async {

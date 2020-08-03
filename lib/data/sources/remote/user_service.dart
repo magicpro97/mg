@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:mg/core/models/base_response.dart';
 import 'package:mg/core/models/result.dart';
-import 'package:mg/data/models/login_response.dart';
+import 'package:mg/data/models/response/base_response.dart';
+import 'package:mg/data/models/response/login_response.dart';
 import 'package:mg/data/models/user.dart';
 
 abstract class UserService {
-  Future<Result<LoginResponse>> login(String username, String password);
+  Future<Result<LoginResponse>> login({String username, String password});
 
   Future<void> signOut();
 
@@ -23,13 +23,14 @@ class UserServiceImpl extends UserService {
   }
 
   @override
-  Future<Result<LoginResponse>> login(String username, String password) async {
-    final res = await _dio.get('');
-
-    return BaseResponse((json) => LoginResponse.fromJson(json),
-            data: res.data, statusCode: res.statusCode)
-        .getResult();
-  }
+  Future<Result<LoginResponse>> login({
+    String username,
+    String password,
+  }) =>
+      _dio
+          .get('')
+          .then((value) => BaseResponse(value.data).data)
+          .catchError((error) => Result.error(error));
 
   @override
   Future<void> signOut() {
