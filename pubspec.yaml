@@ -38,7 +38,6 @@ dependencies:
   rxdart: ^0.24.1
   logger: ^0.9.2
   get_it: ^4.0.4
-  injectable:
   dio: ^3.0.9
   connectivity: '>=0.4.9 <2.0.0'
   data_connection_checker: ^0.3.4
@@ -57,7 +56,6 @@ dev_dependencies:
   freezed:
   json_serializable:
   hive_generator:
-  injectable_generator:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
