@@ -10,8 +10,6 @@ import 'package:mg/data/sources/remote/user_service.dart';
 import 'package:mg/shared/config/api.dart';
 import 'package:mg/shared/interceptors/error_handler_interceptor.dart';
 
-import 'core/bloc/base_bloc.dart';
-
 final getIt = GetIt.instance;
 
 final logger = Logger();
@@ -37,7 +35,7 @@ Future<void> setUpHive() async {
 }
 
 void setUpDio() {
-  getIt.registerLazySingleton(() {
+  getIt.registerSingleton(() {
     final dio = Dio(
       BaseOptions(
         baseUrl: Api.BASE_URL,
@@ -65,7 +63,7 @@ void setUpCached() {
     return EncryptedStorage(box);
   });
 
-  getIt.registerFactoryAsync<BaseBloc>(() async {
+  getIt.registerFactoryAsync<AppBloc>(() async {
     final encryptedBox = await getIt.getAsync(instanceName: _BoxName.CACHED);
     final box = await getIt.getAsync(instanceName: _BoxName.APP_BLOC);
 
