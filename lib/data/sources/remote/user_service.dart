@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mg/core/models/result.dart';
 import 'package:mg/data/models/response/base_response.dart';
 import 'package:mg/data/models/response/login_response.dart';
@@ -12,6 +13,7 @@ abstract class UserService {
   Future<User> fetchUser(String id);
 }
 
+@LazySingleton(as: UserService)
 class UserServiceImpl extends UserService {
   final Dio _dio;
 
@@ -19,6 +21,7 @@ class UserServiceImpl extends UserService {
 
   @override
   Future<User> fetchUser(String id) async {
+    // TODO: implement fetchUser
     throw UnimplementedError();
   }
 
@@ -30,9 +33,9 @@ class UserServiceImpl extends UserService {
       _dio
           .get('')
           .then((value) => BaseResponse.fromJson(
-                value.data,
-                (json) => LoginResponse.fromJson(json),
-              ).data)
+        value.data,
+            (json) => LoginResponse.fromJson(json),
+      ).data)
           .catchError((error) => Result.error(error));
 
   @override

@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:mg/data/models/response/login_response.dart';
 import 'package:mg/data/sources/cache/encrypted_storage.dart';
 import 'package:mg/data/sources/remote/user_service.dart';
@@ -9,6 +10,7 @@ abstract class UserRepository extends BaseRepository<User> {
   Future<User> login({String username, String password});
 }
 
+@lazySingleton
 class UserRepositoryImpl extends UserRepository {
   final UserService _userService;
   final EncryptedStorage _encryptedStorage;
