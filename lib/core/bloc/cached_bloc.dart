@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
+import 'package:mg/core/bloc/base_bloc.dart';
 import 'package:mg/core/type.dart';
 
-abstract class CachedBloc<T> extends Cubit<T> {
+abstract class CachedBloc<T> extends BaseBloc<T> {
   final Box cachedBox;
 
   CachedBloc(T state, this.cachedBox) : super(state);
