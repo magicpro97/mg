@@ -7,6 +7,7 @@ import 'package:mg/app_bloc.dart';
 import 'package:mg/data/repositories/user_repository.dart';
 import 'package:mg/data/sources/cache/encrypted_storage.dart';
 import 'package:mg/data/sources/remote/user_service.dart';
+import 'package:mg/features/login/login_bloc.dart';
 import 'package:mg/shared/config/api.dart';
 import 'package:mg/shared/interceptors/error_handler_interceptor.dart';
 
@@ -28,14 +29,14 @@ Future<void> setUpHive() async {
     instanceName: _BoxName.CACHED,
   );
 
-  getIt.registerLazySingletonAsync<Box<AppStorage>>(
-    () => Hive.openBox<AppStorage>(_BoxName.APP_BLOC),
+  getIt.registerLazySingletonAsync<Box<String>>(
+    () => Hive.openBox<String>(_BoxName.APP_BLOC),
     instanceName: _BoxName.APP_BLOC,
   );
 }
 
 void setUpDio() {
-  getIt.registerSingleton(() {
+  getIt.registerLazySingleton(() {
     final dio = Dio(
       BaseOptions(
         baseUrl: Api.BASE_URL,
@@ -56,46 +57,52 @@ void setUpDio() {
   });
 }
 
+void setUpService() {
+  getIt.registerSingleton<UserService>(UserServiceImpl(getIt.get<Dio>()));
+}
+
+void setUpRepository() {
+  getIt.registerLazySingletonAsync<UserRepository>(() async {
+    final box = await getIt.getAsync<EncryptedStorage>();
+    final userService = getIt.get<UserService>();
+
+    return UserRepositoryImpl(userService, box);
+  });
+}
+
 void setUpCached() {
   getIt.registerLazySingletonAsync<EncryptedStorage>(() async {
     final box = await getIt.getAsync(instanceName: _BoxName.CACHED);
 
     return EncryptedStorage(box);
   });
+}
 
+void setUpBloc() {
   getIt.registerFactoryAsync<AppBloc>(() async {
-    final encryptedBox = await getIt.getAsync(instanceName: _BoxName.CACHED);
+    final encryptedBox = await getIt.getAsync<EncryptedStorage>();
     final box = await getIt.getAsync(instanceName: _BoxName.APP_BLOC);
 
     return AppBloc(box, encryptedBox);
   });
-}
 
-void setUpService() {
-  getIt.registerLazySingletonAsync<UserService>(() async {
-    final dio = await getIt.getAsync<Dio>();
+  getIt.registerFactoryAsync<LoginBloc>(() async {
+    final userRepository = await getIt.getAsync<UserRepository>();
 
-    return UserServiceImpl(dio);
-  });
-}
-
-void setUpRepository() {
-  getIt.registerLazySingletonAsync<UserRepository>(() async {
-    final box = await getIt.getAsync(instanceName: _BoxName.CACHED);
-    final userService = await getIt.getAsync<UserService>();
-
-    return UserRepositoryImpl(userService, box);
+    return LoginBloc(userRepository);
   });
 }
 
 Future<void> setup() async {
   await setUpHive();
 
-  setUpCached();
-
   setUpDio();
 
   setUpService();
 
   setUpRepository();
+
+  setUpCached();
+
+  setUpBloc();
 }

@@ -22,10 +22,10 @@ class AppBloc extends SimpleCachedBloc<AppState, AppStorage> {
   AppBloc(Box<String> cachedBox, this._encryptedStorage)
       : super(AppState.unAuthorized(), cachedBox);
 
-  void isLogin() {
+  void checkAuthorization() {
     final token = _encryptedStorage.getToken();
 
-    if (token?.isNotEmpty ?? false) {
+    if (token?.isEmpty ?? true) {
       unAuthorized();
     } else {
       authorized();
