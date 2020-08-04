@@ -16,9 +16,9 @@ final logger = Logger();
 void setup() async {
   await Hive.initFlutter();
 
-  final cachedBox = await Hive.openBox('cached');
-
-  getIt.registerLazySingleton(() => cachedBox, instanceName: 'cachedBox');
+  getIt.registerLazySingleton(() async {
+    return await Hive.openBox<String>('cached');
+  }, instanceName: 'cachedBox');
 
   getIt.registerLazySingleton(
       () => EncryptedStorage(getIt.get(instanceName: 'cachedBox')));
