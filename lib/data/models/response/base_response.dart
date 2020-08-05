@@ -1,6 +1,5 @@
+import 'package:mg/core/models/result.dart';
 import 'package:mg/data/models/response/error_response.dart';
-
-import '../../../core/models/result.dart';
 
 class BaseResponse<T> {
   final Result<T> data;

@@ -25,49 +25,12 @@ class ErrorHandlerInterceptor extends Interceptor {
 
   @override
   Future onError(DioError err) async {
-    HttpError httpError;
+    HttpError httpError = parseError(err);
 
-    switch (err.type) {
-      case DioErrorType.CONNECT_TIMEOUT:
-        httpError = HttpError.connectTimeOut();
-        break;
-      case DioErrorType.SEND_TIMEOUT:
-        httpError = HttpError.sendTimeOut();
-        break;
-      case DioErrorType.RECEIVE_TIMEOUT:
-        httpError = HttpError.receiveTimeOut();
-        break;
-      case DioErrorType.RESPONSE:
-        httpError = HttpError.response();
-        break;
-      case DioErrorType.CANCEL:
-        httpError = HttpError.cancel();
-        break;
-      case DioErrorType.DEFAULT:
-        switch (err.response.statusCode) {
-          case 400:
-            httpError = HttpError.badRequest();
-            break;
-          case 401:
-            httpError = HttpError.unAuthorized();
-            break;
-          case 403:
-            httpError = HttpError.forbidden();
-            break;
-          case 404:
-            httpError = HttpError.notFound();
-            break;
-          case 500:
-            break;
-          default:
-            httpError = HttpError.internalServer();
-        }
-        break;
-    }
     return _dio.reject(Error.server(httpError: httpError));
   }
 
-  HttpError getError(DioError error) {
+  HttpError parseError(DioError error) {
     switch (error.type) {
       case DioErrorType.CONNECT_TIMEOUT:
         return HttpError.connectTimeOut();
@@ -79,7 +42,7 @@ class ErrorHandlerInterceptor extends Interceptor {
         return HttpError.response();
       case DioErrorType.CANCEL:
         return HttpError.cancel();
-      case DioErrorType.DEFAULT:
+      default:
         switch (error.response.statusCode) {
           case 400:
             return HttpError.badRequest();
