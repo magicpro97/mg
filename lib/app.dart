@@ -5,6 +5,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 import 'package:flutter_translate/localized_app.dart';
 import 'package:mg/app_bloc.dart';
 import 'package:mg/app_bloc_middleware.dart';
+import 'package:mg/data/repositories/token_repository.dart';
 import 'package:mg/data/repositories/user_repository.dart';
 
 import 'i18n/i18n.dart';
@@ -14,11 +15,13 @@ import 'theme.dart';
 class App extends StatelessWidget {
   final UserRepository userRepository;
   final AppBloc appBloc;
+  final TokenRepository tokenRepository;
 
   const App({
     Key key,
     @required this.userRepository,
     @required this.appBloc,
+    @required this.tokenRepository,
   }) : super(key: key);
 
   @override
@@ -28,6 +31,7 @@ class App extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<UserRepository>.value(value: userRepository),
+        RepositoryProvider<TokenRepository>.value(value: tokenRepository),
       ],
       child: MultiBlocProvider(
         providers: [

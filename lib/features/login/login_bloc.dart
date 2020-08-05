@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:mg/core/bloc/base_bloc.dart';
+import 'package:mg/data/models/response/login_response.dart';
+import 'package:mg/data/repositories/token_repository.dart';
 import 'package:mg/data/repositories/user_repository.dart';
 
 part 'login_bloc.freezed.dart';
@@ -15,11 +17,21 @@ abstract class LoginState with _$LoginState {
 
 class LoginBloc extends BaseBloc<LoginState> {
   final UserRepository _userRepository;
+  final TokenRepository _tokenRepository;
 
-  LoginBloc(this._userRepository) : super(LoginState.initial());
+  LoginBloc(
+    this._userRepository,
+    this._tokenRepository,
+  ) : super(LoginState.initial());
 
   void login({String username, String password}) => _userRepository
       .login(username: username, password: password)
-      .then((user) => emit(LoginState.success()))
+      .then(_loginSuccess)
       .catchError((error) => emit(LoginState.fail()));
+
+  void _loginSuccess(LoginResponse loginResponse) {
+    _tokenRepository.saveToken(loginResponse.accessToken);
+
+    emit(LoginState.success());
+  }
 }

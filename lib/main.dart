@@ -4,6 +4,7 @@ import 'package:flutter_translate/localization_delegate.dart';
 import 'package:flutter_translate/localized_app.dart';
 import 'package:mg/app.dart';
 import 'package:mg/app_bloc.dart';
+import 'package:mg/data/repositories/token_repository.dart';
 import 'package:mg/data/repositories/user_repository.dart';
 import 'package:mg/injector_container.dart';
 import 'package:mg/shared/constants/keys.dart';
@@ -14,8 +15,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await setup();
-  final userRepository = await getIt.getAsync<UserRepository>();
+  final userRepository = getIt.get<UserRepository>();
   final appBloc = await getIt.getAsync<AppBloc>();
+  final tokenRepository = await getIt.getAsync<TokenRepository>();
 
   var delegate = await LocalizationDelegate.create(
     fallbackLocale: 'en',
@@ -28,6 +30,7 @@ void main() async {
       App(
         userRepository: userRepository,
         appBloc: appBloc,
+        tokenRepository: tokenRepository,
       ),
     ),
   );

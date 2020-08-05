@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
 import 'package:mg/app_bloc.dart';
+import 'package:mg/data/repositories/token_repository.dart';
 import 'package:mg/data/repositories/user_repository.dart';
 import 'package:mg/data/sources/cache/encrypted_storage.dart';
 import 'package:mg/data/sources/remote/user_service.dart';
@@ -62,12 +63,11 @@ void setUpService() {
 }
 
 void setUpRepository() {
-  getIt.registerLazySingletonAsync<UserRepository>(() async {
-    final box = await getIt.getAsync<EncryptedStorage>();
-    final userService = getIt.get<UserService>();
+  getIt.registerLazySingletonAsync<TokenRepository>(() async =>
+      TokenRepositoryImpl(await getIt.getAsync<EncryptedStorage>()));
 
-    return UserRepositoryImpl(userService, box);
-  });
+  getIt.registerLazySingleton<UserRepository>(
+      () => UserRepositoryImpl(getIt.get<UserService>()));
 }
 
 void setUpCached() {
@@ -88,8 +88,9 @@ void setUpBloc() {
 
   getIt.registerFactoryAsync<LoginBloc>(() async {
     final userRepository = await getIt.getAsync<UserRepository>();
+    final tokenRepository = await getIt.getAsync<TokenRepository>();
 
-    return LoginBloc(userRepository);
+    return LoginBloc(userRepository, tokenRepository);
   });
 }
 

@@ -1,10 +1,11 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:mg/core/models/base_model.dart';
 import 'package:mg/data/models/user.dart';
 
 part 'login_response.g.dart';
 
 @JsonSerializable()
-class LoginResponse {
+class LoginResponse extends BaseModel {
   @JsonKey(name: 'access_token')
   final String accessToken;
 
@@ -22,4 +23,7 @@ class LoginResponse {
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseFromJson(json);
+
+  @override
+  List<Object> get props => [accessToken];
 }
