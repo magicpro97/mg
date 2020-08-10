@@ -23,6 +23,7 @@ import 'package:mg/shared/widgets/dialogs/error_dialog.dart';
 import 'package:mg/shared/widgets/text_fields/underline_text_field.dart';
 import 'package:mg/style/color.dart';
 import 'package:mg/style/dimen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'login_bloc.dart';
 
@@ -202,7 +203,15 @@ class LoginScreen extends HookWidget {
                   ],
                 ),
                 Spacer(),
-                ClickableImage(image: Image.asset(ImagePaths.IC_CALL),),
+                ClickableImage(
+                  image: Image.asset(ImagePaths.IC_CALL),
+                  onPress: () async {
+                    const tel = 'tel:1800888811';
+                    if (await canLaunch(tel)) {
+                      launch(tel);
+                    }
+                  },
+                ),
               ],
             ),
           ),
