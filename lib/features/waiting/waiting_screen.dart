@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
-
-import '../../i18n/i18n.dart';
-import '../../shared/widgets/anim/ripples_animation.dart';
-import '../../shared/widgets/clickable_text.dart';
-import '../../shared/widgets/rounded_icon.dart';
-import '../../style/color.dart';
-import '../../style/dimen.dart';
+import 'package:mg/i18n/i18n.dart';
+import 'package:mg/shared/widgets/anims/ripples_animation.dart';
+import 'package:mg/shared/widgets/clickable_text.dart';
+import 'package:mg/shared/widgets/rounded_icon.dart';
+import 'package:mg/style/color.dart';
+import 'package:mg/style/dimen.dart';
 
 class WaitingScreen extends StatelessWidget {
   static const route = '/waiting';
@@ -34,7 +33,12 @@ class WaitingScreen extends StatelessWidget {
               SizedBox(height: Dimen.SPACE_X1),
               Text(translate(I18n.TXT_WAIT_INSTRUCTION)),
               Spacer(),
-              RipplesAnimation(),
+              RipplesAnimation(
+                child: Icon(
+                  Icons.speaker_phone,
+                  size: 44,
+                ),
+              ),
               Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

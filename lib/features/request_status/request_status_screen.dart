@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../i18n/i18n.dart';
-import '../../shared/widgets/base_screen.dart';
-import '../../shared/widgets/rounded_button.dart';
+import '../../shared/widgets/buttons/rounded_button.dart';
 import '../../shared/widgets/rounded_icon.dart';
 import '../../style/color.dart';
 import '../../style/dimen.dart';
+import '../base_screen.dart';
 
 class RequestStatusScreen extends StatelessWidget {
   static const route = "/request_status";

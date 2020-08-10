@@ -80,14 +80,14 @@ void setUpCached() {
 
 void setUpBloc() {
   getIt.registerFactoryAsync<AppBloc>(() async {
-    final encryptedBox = await getIt.getAsync<EncryptedStorage>();
-    final box = await getIt.getAsync(instanceName: _BoxName.APP_BLOC);
+    final tokenRepo = await getIt.getAsync<TokenRepository>();
+    final appBox = await getIt.getAsync(instanceName: _BoxName.APP_BLOC);
 
-    return AppBloc(box, encryptedBox);
+    return AppBloc(appBox, tokenRepo);
   });
 
   getIt.registerFactoryAsync<LoginBloc>(() async {
-    final userRepository = await getIt.getAsync<UserRepository>();
+    final userRepository = getIt.get<UserRepository>();
     final tokenRepository = await getIt.getAsync<TokenRepository>();
 
     return LoginBloc(userRepository, tokenRepository);

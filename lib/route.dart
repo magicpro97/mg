@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mg/core/providers/async_bloc_provider.dart';
+import 'package:mg/features/login/login_bloc.dart';
 import 'package:mg/features/request_assistance/request_assistance_screen.dart';
+import 'package:mg/injector_container.dart';
 
 import 'features/account/account_screen.dart';
 import 'features/cancel/cancel_screen.dart';
@@ -30,7 +33,10 @@ RouteFactory routes() {
     // final arguments = settings.arguments as Map<String, dynamic> ?? {};
     switch (settings.name) {
       case LoginScreen.route:
-        screen = LoginScreen();
+        screen = AsyncBlocProvider(
+          asyncBloc: getIt.getAsync<LoginBloc>(),
+          child: LoginScreen(),
+        );
         break;
       case HomeScreen.route:
         screen = BlocProvider(

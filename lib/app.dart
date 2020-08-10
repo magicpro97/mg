@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:flutter_translate/localized_app.dart';
 import 'package:mg/app_bloc.dart';
-import 'package:mg/app_bloc_middleware.dart';
 import 'package:mg/data/repositories/token_repository.dart';
 import 'package:mg/data/repositories/user_repository.dart';
 
@@ -39,14 +39,14 @@ class App extends StatelessWidget {
         ],
         child: LocalizationProvider(
           state: LocalizationProvider.of(context).state,
-          child: AppBlocMiddleware(
+          child: FlutterEasyLoading(
             child: MaterialApp(
               title: translate(I18n.APP_NAME),
               theme: AppTheme.defaultTheme,
               localizationsDelegates: [
                 GlobalMaterialLocalizations.delegate,
                 GlobalWidgetsLocalizations.delegate,
-                localizationDelegate
+                localizationDelegate,
               ],
               supportedLocales: localizationDelegate.supportedLocales,
               locale: localizationDelegate.currentLocale,

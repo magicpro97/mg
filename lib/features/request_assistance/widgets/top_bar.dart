@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../../i18n/i18n.dart';
-import '../../../shared/widgets/v_icon_button.dart';
+import '../../../shared/widgets/buttons/v_icon_button.dart';
 import '../../../style/color.dart';
 import '../../../style/dimen.dart';
 

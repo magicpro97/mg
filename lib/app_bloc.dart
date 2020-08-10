@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:mg/core/bloc/cached_bloc.dart';
-import 'package:mg/data/sources/cache/encrypted_storage.dart';
+import 'package:mg/data/repositories/token_repository.dart';
 
 part 'app_bloc.freezed.dart';
 
@@ -12,18 +12,22 @@ abstract class AppState with _$AppState {
   factory AppState.unAuthorized() = _UnAuthorized;
 
   factory AppState.authorized() = _Authorized;
+
+  const factory AppState.loading() = _Loading;
 }
 
 class AppStorage {}
 
 class AppBloc extends SimpleCachedBloc<AppState, AppStorage> {
-  final EncryptedStorage _encryptedStorage;
+  final TokenRepository _tokenRepository;
 
-  AppBloc(Box<String> cachedBox, this._encryptedStorage)
+  AppBloc(Box<String> cachedBox, this._tokenRepository)
       : super(AppState.unAuthorized(), cachedBox);
 
   void checkAuthorization() {
-    final token = _encryptedStorage.getToken();
+    loading();
+
+    final token = _tokenRepository.getToken();
 
     if (token?.isEmpty ?? true) {
       unAuthorized();
@@ -31,6 +35,8 @@ class AppBloc extends SimpleCachedBloc<AppState, AppStorage> {
       authorized();
     }
   }
+
+  void loading() => emit(AppState.loading());
 
   void unAuthorized() => emit(AppState.unAuthorized());
 

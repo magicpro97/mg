@@ -34,4 +34,6 @@ abstract class HttpError with _$HttpError {
   const factory HttpError.internalServer() = _InternalServer;
 
   const factory HttpError.forbidden() = _Forbidden;
+
+  const factory HttpError.badGateway() = _BadGateway;
 }

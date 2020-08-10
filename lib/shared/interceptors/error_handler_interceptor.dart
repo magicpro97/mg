@@ -54,6 +54,8 @@ class ErrorHandlerInterceptor extends Interceptor {
             return HttpError.notFound();
           case 500:
             return HttpError.internalServer();
+          case 502:
+            return HttpError.badGateway();
           default:
             return HttpError.internalServer();
         }

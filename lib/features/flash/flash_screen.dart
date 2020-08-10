@@ -25,9 +25,10 @@ class FlashScreen extends HookWidget {
   }
 
   void _appBlocListener(BuildContext context, AppState state) {
-    state.when(
+    state.maybeWhen(
       unAuthorized: () => Navigator.pushNamed(context, LoginScreen.route),
       authorized: () => Navigator.pushNamed(context, HomeScreen.route),
+      orElse: () {},
     );
   }
 }
