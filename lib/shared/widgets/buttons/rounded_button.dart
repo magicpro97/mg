@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../style/dimen.dart';
+import '../../../style/dimen.dart';
 
 class RoundedButton extends StatelessWidget {
   final String label;

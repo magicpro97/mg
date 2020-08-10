@@ -3,7 +3,7 @@ import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../i18n/i18n.dart';
 import '../../shared/widgets/clickable_text.dart';
-import '../../shared/widgets/rounded_text_field.dart';
+import '../../shared/widgets/text_fields/rounded_text_field.dart';
 import '../../style/color.dart';
 import '../../style/dimen.dart';
 

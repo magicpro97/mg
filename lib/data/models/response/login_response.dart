@@ -1,18 +1,19 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:mg/core/models/base_model.dart';
+import 'package:mg/core/mapper/boolean_mapper.dart';
+import 'package:mg/data/models/response/base_response.dart';
 import 'package:mg/data/models/user.dart';
 
 part 'login_response.g.dart';
 
 @JsonSerializable()
-class LoginResponse extends BaseModel {
+class LoginResponse extends BaseResponse {
   @JsonKey(name: 'access_token')
   final String accessToken;
 
-  @JsonKey(name: 'activated')
-  final int isActivated;
+  @JsonKey(name: 'activated', fromJson: toBool)
+  final bool isActivated;
 
-  @JsonKey(name: 'verified')
+  @JsonKey(name: 'verified', fromJson: toBool)
   final bool isVerify;
 
   final User user;

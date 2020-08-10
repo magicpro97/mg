@@ -7,23 +7,20 @@ import 'pulse_curve.dart';
 class RipplesAnimation extends HookWidget {
   final double size;
   final Color color;
+  final Widget child;
 
   const RipplesAnimation({
     Key key,
     this.size = 80.0,
     this.color = Colors.red,
+    this.child,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final animationController =
-        useAnimationController(duration: const Duration(milliseconds: 1000));
-
-    useEffect(() {
-      animationController.repeat();
-
-      return animationController.dispose;
-    }, [animationController]);
+        useAnimationController(duration: const Duration(milliseconds: 1000))
+          ..repeat();
 
     Widget _button() {
       return Center(
@@ -36,16 +33,14 @@ class RipplesAnimation extends HookWidget {
               ),
             ),
             child: ScaleTransition(
-                scale: Tween(begin: 0.95, end: 1.0).animate(
-                  CurvedAnimation(
-                    parent: animationController,
-                    curve: const PulsateCurve(),
-                  ),
+              scale: Tween(begin: 0.95, end: 1.0).animate(
+                CurvedAnimation(
+                  parent: animationController,
+                  curve: const PulsateCurve(),
                 ),
-                child: Icon(
-                  Icons.speaker_phone,
-                  size: 44,
-                )),
+              ),
+              child: child ?? Container(),
+            ),
           ),
         ),
       );

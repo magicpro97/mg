@@ -1,10 +1,11 @@
+import 'dart:math';
+
 import 'package:mg/core/repositories/base_repository.dart';
 import 'package:mg/data/models/response/login_response.dart';
 import 'package:mg/data/sources/remote/user_service.dart';
 
-
 abstract class UserRepository extends BaseRepository<LoginResponse> {
-  Future<LoginResponse> login({String username, String password});
+  Future login({String username, String password});
 }
 
 class UserRepositoryImpl extends UserRepository {
@@ -13,17 +14,18 @@ class UserRepositoryImpl extends UserRepository {
   UserRepositoryImpl(this._userService);
 
   @override
-  Future<LoginResponse> login({String username, String password}) async {
-    final result = await _userService.login(
-      username: username,
-      password: password,
-    );
-
-    return result.maybeWhen(
-      success: (result) => result,
-      orElse: () {
-        return null;
-      },
-    );
-  }
+  Future login({String username, String password}) => _userService
+          .login(
+            username: username,
+            password: password,
+          )
+          .then((value) => value.maybeWhen(
+                success: (result) => result,
+                error: (error) => error,
+                orElse: () => null,
+              ))
+          .catchError((error) {
+        log(error);
+        return error;
+      });
 }

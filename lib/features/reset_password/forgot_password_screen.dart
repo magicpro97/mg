@@ -3,11 +3,11 @@ import 'package:flutter_translate/flutter_translate.dart';
 
 import '../../i18n/i18n.dart';
 import '../../shared/constants/image_paths.dart';
-import '../../shared/widgets/base_screen.dart';
-import '../../shared/widgets/rounded_button.dart';
-import '../../shared/widgets/underline_text_field.dart';
+import '../../shared/widgets/buttons/rounded_button.dart';
+import '../../shared/widgets/text_fields/underline_text_field.dart';
 import '../../style/color.dart';
 import '../../style/dimen.dart';
+import '../base_screen.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   static const route = '/forgot_password';
