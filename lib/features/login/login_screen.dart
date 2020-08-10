@@ -62,10 +62,9 @@ class LoginScreen extends HookWidget {
               showDialog(
                   context: context,
                   child: ErrorDialog(
-                    title: 'Error',
-                    content: message ??
-                        'Cannot connect to server. Please try again.',
-                    negativeLabel: 'Close',
+                    title: translate(I18n.TXT_ERROR),
+                    content: message ?? translate(I18n.MGS_SERVER_ERROR),
+                    negativeLabel: translate(I18n.TXT_CLOSE),
                     onNegativePressed: () => Navigator.pop(context),
                   ));
             },
