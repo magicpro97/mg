@@ -12,6 +12,8 @@ import 'package:mg/core/bloc/text_field_bloc.dart';
 import 'package:mg/core/hooks/text_field_bloc_hook.dart';
 import 'package:mg/features/base_screen.dart';
 import 'package:mg/features/home/home_screen.dart';
+import 'package:mg/features/register/sign_up_screen.dart';
+import 'package:mg/features/reset_password/forgot_password_screen.dart';
 import 'package:mg/i18n/i18n.dart';
 import 'package:mg/shared/constants/image_paths.dart';
 import 'package:mg/shared/widgets/buttons/rounded_button.dart';
@@ -184,6 +186,8 @@ class LoginScreen extends HookWidget {
                       child: ClickableText(
                         text: translate(I18n.TXT_FORGOT_PASSWORD),
                         color: AppColor.WHITE,
+                        onPress: () => Navigator.pushNamed(
+                            context, ForgotPasswordScreen.route),
                       ),
                     ),
                     Container(
@@ -191,12 +195,14 @@ class LoginScreen extends HookWidget {
                       child: ClickableText(
                         text: translate(I18n.TXT_SIGN_UP),
                         color: AppColor.WHITE,
+                        onPress: () =>
+                            Navigator.pushNamed(context, SignUpScreen.route),
                       ),
                     ),
                   ],
                 ),
                 Spacer(),
-                ClickableImage(image: Image.asset(ImagePaths.IC_CALL)),
+                ClickableImage(image: Image.asset(ImagePaths.IC_CALL),),
               ],
             ),
           ),

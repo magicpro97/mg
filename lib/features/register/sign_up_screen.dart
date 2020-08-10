@@ -20,18 +20,19 @@ class SignUpScreen extends StatelessWidget {
           Icons.close,
           color: AppColor.BLACK,
         ),
-        onPressed: () {},
+        onPressed: () => Navigator.pop(context),
       ),
       actions: <Widget>[
         IconButton(
           icon: Icon(
-            Icons.close,
+            Icons.done,
             color: AppColor.BLACK,
           ),
           onPressed: () {},
         ),
       ],
       child: SafeArea(
+        bottom: false,
         child: Container(
           color: AppColor.PRIMARY,
           padding: const EdgeInsets.symmetric(horizontal: Dimen.SPACE_X2),
