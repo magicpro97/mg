@@ -11,6 +11,7 @@ import 'package:mg/data/sources/remote/user_service.dart';
 import 'package:mg/features/login/login_bloc.dart';
 import 'package:mg/shared/config/api.dart';
 import 'package:mg/shared/interceptors/error_handler_interceptor.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 final getIt = GetIt.instance;
 
@@ -45,7 +46,7 @@ void setUpDio() {
     );
 
     dio.interceptors.addAll([
-      LogInterceptor(
+      PrettyDioLogger(
         request: true,
         responseBody: true,
         responseHeader: true,
