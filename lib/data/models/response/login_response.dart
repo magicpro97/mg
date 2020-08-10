@@ -18,7 +18,17 @@ class LoginResponse extends BaseResponse {
 
   final User user;
 
-  LoginResponse({this.accessToken, this.isActivated, this.isVerify, this.user});
+  LoginResponse({
+    this.accessToken,
+    this.isActivated,
+    this.isVerify,
+    this.user,
+    int code,
+    String message,
+  }) : super(
+          code: code,
+          message: message,
+        );
 
   Map<String, dynamic> toJson() => _$LoginResponseToJson(this);
 

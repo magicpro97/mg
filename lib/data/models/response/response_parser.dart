@@ -15,7 +15,7 @@ class ResponseParser<T> {
 
       switch (code) {
         case 0:
-          final data = fromJson(json);
+          final data = fromJson?.call(json);
 
           return ResponseParser(Result.success(data));
         case 1:

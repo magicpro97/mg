@@ -1,11 +1,16 @@
 import 'package:mg/data/models/response/base_response.dart';
 
 class ErrorResponse extends BaseResponse {
-  final int code;
-  final String message;
   final dynamic data;
 
-  ErrorResponse({this.code, this.message, this.data});
+  ErrorResponse({
+    int code,
+    String message,
+    this.data,
+  }) : super(
+          code: code,
+          message: message,
+        );
 
   factory ErrorResponse.fromJson(Map<String, dynamic> json) {
     return ErrorResponse(
