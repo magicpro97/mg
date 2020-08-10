@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mg/core/providers/async_bloc_provider.dart';
+import 'package:mg/core/route/platform_page_route.dart';
 import 'package:mg/features/login/login_bloc.dart';
 import 'package:mg/features/request_assistance/request_assistance_screen.dart';
 import 'package:mg/injector_container.dart';
@@ -89,16 +90,23 @@ RouteFactory routes() {
     }
 
     if (fullScreen) {
-      return MaterialPageRoute(
+      return PlatformPageRoute.create(
         builder: (_) => screen,
-        fullscreenDialog: true,
+        fullscreenDialog: fullScreen,
       );
     }
 
-    return PageRouteBuilder(pageBuilder: (BuildContext context, _, __) {
-      return screen;
-    }, transitionsBuilder: (_, Animation<double> animation, __, Widget child) {
-      return FadeTransition(opacity: animation, child: child);
-    });
+    if (screen is LoginScreen) {
+      return PageRouteBuilder(pageBuilder: (BuildContext context, _, __) {
+        return screen;
+      }, transitionsBuilder:
+          (_, Animation<double> animation, __, Widget child) {
+        return FadeTransition(opacity: animation, child: child);
+      });
+    }
+
+    return PlatformPageRoute.create(
+      builder: (_) => screen,
+    );
   };
 }
