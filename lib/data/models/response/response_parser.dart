@@ -16,12 +16,10 @@ class ResponseParser<T> {
           final data = fromJson(json);
 
           return ResponseParser(Result.success(data));
-          break;
         case 1:
           final error = ErrorResponse.fromJson(json);
 
           return ResponseParser(Result.error(error));
-          break;
         default:
           return ResponseParser(Result.unknown(null));
       }
