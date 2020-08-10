@@ -6,8 +6,10 @@ class ResponseParser<T> {
 
   ResponseParser(this.data);
 
-  factory ResponseParser.fromJson(Map<String, dynamic> json,
-      T Function(Map<String, dynamic> fromJson) fromJson) {
+  factory ResponseParser.fromJson(
+    Map<String, dynamic> json,
+    T Function(Map<String, dynamic> fromJson) fromJson,
+  ) {
     try {
       final code = json['code'] as int;
 
