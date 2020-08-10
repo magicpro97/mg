@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:mg/core/models/result.dart';
-import 'package:mg/data/models/response/base_response.dart';
 import 'package:mg/data/models/response/login_response.dart';
 import 'package:mg/data/models/response/response_parser.dart';
 import 'package:mg/shared/config/api.dart';
@@ -32,7 +31,7 @@ class UserServiceImpl extends UserService {
           .then(
             (value) => ResponseParser.fromJson(
               value.data,
-              (json) => LoginResponse.fromJson(json),
+              fromJson: (json) => LoginResponse.fromJson(json),
             ).data,
           )
           .catchError((error) => error);
@@ -47,7 +46,6 @@ class UserServiceImpl extends UserService {
       )
       .then((value) => ResponseParser.fromJson(
             value.data,
-            (json) => BaseResponse.fromJson(json),
           ).data)
       .catchError((error) => error);
 }
