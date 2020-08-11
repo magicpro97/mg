@@ -6,6 +6,9 @@ abstract class UserRepository extends BaseRepository<LoginResponse> {
   Future login({String username, String password});
 
   Future forgotPassword(String email);
+
+  Future register(
+      {String username, String password, String phone, String email});
 }
 
 class UserRepositoryImpl extends UserRepository {
@@ -35,4 +38,21 @@ class UserRepositoryImpl extends UserRepository {
             success: (result) => result,
           ))
       .catchError((error) => error);
+
+  @override
+  Future register(
+          {String username, String password, String phone, String email}) =>
+      _userService
+          .register(
+            username: username,
+            password: password,
+            phone: phone,
+            email: email,
+          )
+          .then((value) => value.maybeWhen(
+                orElse: () => null,
+                error: (error) => error,
+                success: (result) => result,
+              ))
+          .catchError((error) => error);
 }

@@ -8,6 +8,9 @@ abstract class UserService {
   Future<Result> login({String username, String password});
 
   Future<Result> forgotPassword(String email);
+
+  Future<Result> register(
+      {String username, String password, String phone, String email});
 }
 
 class UserServiceImpl extends UserService {
@@ -44,8 +47,25 @@ class UserServiceImpl extends UserService {
           'email': email,
         },
       )
-      .then((value) => ResponseParser.fromJson(
-            value.data,
-          ).data)
+      .then((value) => ResponseParser.fromJson(value.data).data)
       .catchError((error) => error);
+
+  @override
+  Future<Result> register(
+          {String username, String password, String phone, String email}) =>
+      _dio
+          .post(
+            Api.REGISTER,
+            data: {
+              'userName': username,
+              'password': password,
+              'userMobile': phone,
+              'userEmail': email,
+            },
+          )
+          .then((value) => ResponseParser.fromJson(
+                value.data,
+                fromJson: (json) => LoginResponse.fromJson(json),
+              ).data)
+          .catchError((error) => error);
 }

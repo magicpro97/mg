@@ -9,6 +9,8 @@ import 'package:mg/data/repositories/user_repository.dart';
 import 'package:mg/data/sources/cache/encrypted_storage.dart';
 import 'package:mg/data/sources/remote/user_service.dart';
 import 'package:mg/features/login/login_bloc.dart';
+import 'package:mg/features/register/sign_up_bloc.dart';
+import 'package:mg/features/reset_password/forgot_password_bloc.dart';
 import 'package:mg/shared/config/api.dart';
 import 'package:mg/shared/interceptors/error_handler_interceptor.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -93,6 +95,13 @@ void setUpBloc() {
 
     return LoginBloc(userRepository, tokenRepository);
   });
+
+  getIt.registerFactory(() => ForgotPasswordBloc(getIt.get()));
+
+  getIt.registerFactoryAsync(() async => SignUpBloc(
+        getIt.get(),
+        await getIt.getAsync<TokenRepository>(),
+      ));
 }
 
 Future<void> setup() async {

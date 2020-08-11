@@ -8,4 +8,6 @@
   static const USER = '$WEB_SERVICE_URL/user';
 
   static const FORGOT_PASSWORD = '$USER/forgotpassword';
+
+  static const REGISTER = '$USER/register';
 }

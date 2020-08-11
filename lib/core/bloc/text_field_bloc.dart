@@ -19,6 +19,8 @@ class TextFieldBloc extends BaseBloc<TextFieldState> {
   final Box<String> cachedBox;
   final String cachedKey;
 
+  String value;
+
   TextFieldBloc(
     this.condition, {
     this.initialValue,
@@ -28,6 +30,8 @@ class TextFieldBloc extends BaseBloc<TextFieldState> {
             initialValue ?? cachedBox?.get(cachedKey ?? '') ?? ''));
 
   void onTextChange(String value) {
+    this.value = value;
+
     cachedBox?.put(cachedKey, value);
 
     final error = condition(value);

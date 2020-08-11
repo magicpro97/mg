@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mg/core/providers/async_bloc_provider.dart';
-import 'package:mg/core/route/platform_page_route.dart';
+import 'package:mg/core/utils/platform_page_route.dart';
+import 'package:mg/features/account/account_screen.dart';
+import 'package:mg/features/cancel/cancel_screen.dart';
+import 'package:mg/features/change_password/change_password_screen.dart';
+import 'package:mg/features/feedback/feedback_screen.dart';
+import 'package:mg/features/home/bloc/home_bloc.dart';
+import 'package:mg/features/home/home_screen.dart';
 import 'package:mg/features/login/login_bloc.dart';
+import 'package:mg/features/login/login_screen.dart';
+import 'package:mg/features/register/sign_up_bloc.dart';
+import 'package:mg/features/register/sign_up_screen.dart';
+import 'package:mg/features/register_vehicle/register_vehicle_screen.dart';
 import 'package:mg/features/request_assistance/request_assistance_screen.dart';
+import 'package:mg/features/request_status/request_status_screen.dart';
 import 'package:mg/features/reset_password/forgot_password_bloc.dart';
+import 'package:mg/features/reset_password/forgot_password_screen.dart';
+import 'package:mg/features/screen.dart';
+import 'package:mg/features/waiting/waiting_screen.dart';
 import 'package:mg/injector_container.dart';
-
-import 'features/account/account_screen.dart';
-import 'features/cancel/cancel_screen.dart';
-import 'features/change_password/change_password_screen.dart';
-import 'features/feedback/feedback_screen.dart';
-import 'features/home/bloc/home_bloc.dart';
-import 'features/login/login_screen.dart';
-import 'features/register/sign_up_screen.dart';
-import 'features/register_vehicle/register_vehicle_screen.dart';
-import 'features/request_status/request_status_screen.dart';
-import 'features/reset_password/forgot_password_screen.dart';
-import 'features/screen.dart';
-import 'features/waiting/waiting_screen.dart';
 
 var bootStage = 1;
 
@@ -49,7 +50,10 @@ RouteFactory routes() {
         );
         break;
       case SignUpScreen.route:
-        screen = SignUpScreen();
+        screen = AsyncBlocProvider(
+          asyncBloc: getIt.getAsync<SignUpBloc>(),
+          child: SignUpScreen(),
+        );
         break;
       case RegisterVehicleScreen.route:
         screen = RegisterVehicleScreen();
@@ -59,7 +63,7 @@ RouteFactory routes() {
         break;
       case ForgotPasswordScreen.route:
         screen = BlocProvider(
-          create: (_) => ForgotPasswordBloc(getIt.get()),
+          create: (_) => getIt.get<ForgotPasswordBloc>(),
           child: ForgotPasswordScreen(),
         );
         break;

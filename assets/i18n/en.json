@@ -56,5 +56,9 @@
   "txt_close": "Close",
   "txt_success": "Success",
   "txt_ok": "OK",
-  "msg_required_error": "Required"
+  "msg_required_error": "Required",
+  "msg_password_not_the_same": "Password is not the same.",
+  "msg_password_requirement": "Your password must contain minimum 8 characters, at least one lowercase character, one uppercase character, one number.",
+  "msg_invalid_email": "Invalid email.",
+  "msg_invalid_phone": "Invalid phone number."
 }
