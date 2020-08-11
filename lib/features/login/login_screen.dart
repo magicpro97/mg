@@ -42,10 +42,10 @@ class LoginScreen extends HookWidget {
     final appBloc = context.bloc<AppBloc>();
 
     final usernameBloc = useTextFieldBloc(
-      (value) => value.isEmpty ? 'Required field' : null,
+      (value) => value.isEmpty ? translate(I18n.MSG_REQUIRED_ERROR) : null,
     );
     final passwordBloc = useTextFieldBloc(
-      (value) => value.isEmpty ? 'Required field' : null,
+          (value) => value.isEmpty ? translate(I18n.MSG_REQUIRED_ERROR) : null,
     );
 
     return BlocListener<LoginBloc, LoginState>(
@@ -95,10 +95,6 @@ class LoginScreen extends HookWidget {
                   BlocBuilder<TextFieldBloc, TextFieldState>(
                     cubit: usernameBloc,
                     builder: (_, state) => _TextField(
-                      initialValue: state.maybeWhen(
-                        orElse: () => '',
-                        normal: (value) => value,
-                      ),
                       hintText: translate(I18n.TXT_USER_NAME),
                       prefixIcon: Icon(
                         Icons.email,
@@ -118,10 +114,6 @@ class LoginScreen extends HookWidget {
                   BlocBuilder<TextFieldBloc, TextFieldState>(
                     cubit: passwordBloc,
                     builder: (_, state) => _TextField(
-                      initialValue: state.maybeWhen(
-                        orElse: () => '',
-                        normal: (value) => value,
-                      ),
                       hintText: translate(I18n.TXT_PASSWORD),
                       prefixIcon: Icon(
                         Icons.fingerprint,
@@ -223,7 +215,6 @@ class _TextField extends StatelessWidget {
   final String errorText;
   final Function(String) onTextChange;
   final TextEditingController controller;
-  final String initialValue;
 
   const _TextField({
     Key key,
@@ -234,7 +225,6 @@ class _TextField extends StatelessWidget {
     this.errorText,
     @required this.onTextChange,
     this.controller,
-    @required this.initialValue,
   }) : super(key: key);
 
   @override
@@ -251,7 +241,6 @@ class _TextField extends StatelessWidget {
       errorText: errorText,
       onTextChange: onTextChange,
       controller: controller,
-      initialValue: initialValue,
     );
   }
 }

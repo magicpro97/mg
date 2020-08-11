@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_translate/flutter_translate.dart';
+import 'package:mg/core/bloc/text_field_bloc.dart';
+import 'package:mg/core/hooks/text_field_bloc_hook.dart';
 import 'package:mg/features/base_screen.dart';
 import 'package:mg/features/reset_password/forgot_password_bloc.dart';
 import 'package:mg/i18n/i18n.dart';
@@ -19,7 +21,9 @@ class ForgotPasswordScreen extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    final email = useTextEditingController();
+    final emailBloc = useTextFieldBloc(
+      (value) => value.isEmpty ? translate(I18n.MSG_REQUIRED_ERROR) : null,
+    );
 
     return BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
       cubit: context.bloc<ForgotPasswordBloc>(),
@@ -60,15 +64,26 @@ class ForgotPasswordScreen extends HookWidget {
                 SizedBox(height: Dimen.SPACE_X2),
                 Text(
                   translate(I18n.TXT_RESET_PASSWORD).toUpperCase(),
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .headline6,
                 ),
                 SizedBox(height: Dimen.SPACE_X1),
                 Text(translate(I18n.TXT_RESET_PASSWORD_INSTRUCTION)),
                 SizedBox(height: Dimen.SPACE_X1),
-                UnderlineTextField(
-                  hintText: translate(I18n.TXT_RESET_PASSWORD_HINT),
-                  keyboardType: TextInputType.emailAddress,
-                  controller: email,
+                BlocBuilder<TextFieldBloc, TextFieldState>(
+                  cubit: emailBloc,
+                  builder: (context, state) =>
+                      UnderlineTextField(
+                        hintText: translate(I18n.TXT_RESET_PASSWORD_HINT),
+                        keyboardType: TextInputType.emailAddress,
+                        onTextChange: emailBloc.onTextChange,
+                        errorText: emailBloc.state.when(
+                          normal: (value) => null,
+                          error: (error) => error,
+                        ),
+                      ),
                 ),
                 SizedBox(height: Dimen.SPACE_X3),
                 RoundedButton(
@@ -76,7 +91,16 @@ class ForgotPasswordScreen extends HookWidget {
                   backgroundColor: AppColor.TRANSPARENT,
                   borderColor: AppColor.BLACK,
                   onPress: () {
-                    context.bloc<ForgotPasswordBloc>().submit(email.text);
+                    final email = emailBloc.state.when(
+                      normal: (value) => value,
+                      error: (error) => null,
+                    );
+
+                    if (email?.isNotEmpty ?? false) {
+                      context.bloc<ForgotPasswordBloc>().submit(email);
+                    } else {
+                      emailBloc.onTextChange(email);
+                    }
                   },
                 ),
               ],

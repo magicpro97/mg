@@ -16,7 +16,7 @@ class CommonErrorDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return TwoOptionDialog(
       title: translate(I18n.TXT_ERROR),
-      content: message ?? translate(I18n.MGS_SERVER_ERROR),
+      content: message ?? translate(I18n.MSG_SERVER_ERROR),
       negativeLabel: translate(I18n.TXT_CLOSE),
       onNegativePressed: () => Navigator.pop(context),
     );
