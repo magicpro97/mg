@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:mg/features/base_screen.dart';
@@ -25,10 +24,8 @@ class ForgotPasswordScreen extends HookWidget {
     return BlocListener<ForgotPasswordBloc, ForgotPasswordState>(
       cubit: context.bloc<ForgotPasswordBloc>(),
       listener: (context, state) {
-        state.when(
+        state.maybeWhen(
           error: (message) {
-            EasyLoading.dismiss();
-
             showDialog(
               context: context,
               child: CommonErrorDialog(
@@ -37,48 +34,53 @@ class ForgotPasswordScreen extends HookWidget {
             );
           },
           success: (message) {
-            EasyLoading.dismiss();
-
             showDialog(
                 context: context,
                 child: CommonSuccessDialog(
                   message: message,
                 ));
           },
-          loading: () => EasyLoading.show(),
+          orElse: () {},
         );
       },
-      child: BaseScreen(
-        title: translate(I18n.TXT_FORGOT_PASSWORD),
-        child: Padding(
-          padding: const EdgeInsets.all(Dimen.SPACE_X2),
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: Dimen.SPACE_X2),
-              Image.asset(ImagePaths.IC_RESET_PW),
-              SizedBox(height: Dimen.SPACE_X2),
-              Text(
-                translate(I18n.TXT_RESET_PASSWORD).toUpperCase(),
-                style: Theme.of(context).textTheme.headline6,
-              ),
-              SizedBox(height: Dimen.SPACE_X1),
-              Text(translate(I18n.TXT_RESET_PASSWORD_INSTRUCTION)),
-              SizedBox(height: Dimen.SPACE_X1),
-              UnderlineTextField(
-                hintText: translate(I18n.TXT_RESET_PASSWORD_HINT),
-                keyboardType: TextInputType.emailAddress,
-                controller: email,
-              ),
-              SizedBox(height: Dimen.SPACE_X3),
-              RoundedButton(
-                label: translate(I18n.TXT_SUBMIT),
-                backgroundColor: AppColor.TRANSPARENT,
-                borderColor: AppColor.BLACK,
-                onPress: () {
-                  context.bloc<ForgotPasswordBloc>().submit(email.text);
-                },
-              ),
-            ],
+      child: BlocBuilder<ForgotPasswordBloc, ForgotPasswordState>(
+        cubit: context.bloc<ForgotPasswordBloc>(),
+        builder: (context, state) => BaseScreen(
+          isLoading: state.maybeWhen(
+            orElse: () => false,
+            loading: () => true,
+          ),
+          title: translate(I18n.TXT_FORGOT_PASSWORD),
+          child: Padding(
+            padding: const EdgeInsets.all(Dimen.SPACE_X2),
+            child: Column(
+              children: <Widget>[
+                SizedBox(height: Dimen.SPACE_X2),
+                Image.asset(ImagePaths.IC_RESET_PW),
+                SizedBox(height: Dimen.SPACE_X2),
+                Text(
+                  translate(I18n.TXT_RESET_PASSWORD).toUpperCase(),
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                SizedBox(height: Dimen.SPACE_X1),
+                Text(translate(I18n.TXT_RESET_PASSWORD_INSTRUCTION)),
+                SizedBox(height: Dimen.SPACE_X1),
+                UnderlineTextField(
+                  hintText: translate(I18n.TXT_RESET_PASSWORD_HINT),
+                  keyboardType: TextInputType.emailAddress,
+                  controller: email,
+                ),
+                SizedBox(height: Dimen.SPACE_X3),
+                RoundedButton(
+                  label: translate(I18n.TXT_SUBMIT),
+                  backgroundColor: AppColor.TRANSPARENT,
+                  borderColor: AppColor.BLACK,
+                  onPress: () {
+                    context.bloc<ForgotPasswordBloc>().submit(email.text);
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

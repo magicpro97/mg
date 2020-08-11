@@ -1,9 +1,7 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_statusbar_text_color/flutter_statusbar_text_color.dart';
 import 'package:flutter_translate/flutter_translate.dart';
@@ -55,162 +53,160 @@ class LoginScreen extends HookWidget {
       listener: (context, state) {
         state.maybeWhen(
             success: () {
-              EasyLoading.dismiss();
+              appBloc.authorized();
 
               Navigator.pushReplacementNamed(context, HomeScreen.route);
             },
-            fail: (message) {
-              EasyLoading.dismiss();
-
-              showDialog(
-                context: context,
-                child: CommonErrorDialog(
-                  message: message,
+            fail: (message) => showDialog(
+                  context: context,
+                  child: CommonErrorDialog(
+                    message: message,
+                  ),
                 ),
-              );
-            },
-            loading: () {
-              EasyLoading.show();
-              appBloc.loading();
-            },
+            loading: () => appBloc.loading(),
             orElse: () => appBloc.unAuthorized());
       },
-      child: BaseScreen(
-        showAppbar: false,
-        child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(ImagePaths.LOGIN_BG),
-              fit: BoxFit.fill,
-            ),
+      child: BlocBuilder<LoginBloc, LoginState>(
+        cubit: context.bloc<LoginBloc>(),
+        builder: (_, state) => BaseScreen(
+          showAppbar: false,
+          isLoading: state.maybeWhen(
+            orElse: () => false,
+            loading: () => true,
           ),
-          padding: const EdgeInsets.symmetric(horizontal: Dimen.SPACE_X2),
-          child: SafeArea(
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: Dimen.SPACE_X3),
-                Image.asset(
-                  ImagePaths.LOGO,
-                  width: 150,
-                  height: 150,
-                ),
-                SizedBox(height: Dimen.SPACE_X3),
-                BlocBuilder<TextFieldBloc, TextFieldState>(
-                  cubit: usernameBloc,
-                  builder: (_, state) => _TextField(
-                    initialValue: state.maybeWhen(
-                      orElse: () => '',
-                      normal: (value) => value,
-                    ),
-                    hintText: translate(I18n.TXT_USER_NAME),
-                    prefixIcon: Icon(
-                      Icons.email,
-                      color: AppColor.WHITE,
-                    ),
-                    keyboardType: TextInputType.emailAddress,
-                    errorText: state.maybeWhen(
-                      orElse: () => null,
-                      error: (error) => error,
-                    ),
-                    onTextChange: (value) {
-                      usernameBloc.onTextChange(value);
-                    },
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(ImagePaths.LOGIN_BG),
+                fit: BoxFit.fill,
+              ),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: Dimen.SPACE_X2),
+            child: SafeArea(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: Dimen.SPACE_X3),
+                  Image.asset(
+                    ImagePaths.LOGO,
+                    width: 150,
+                    height: 150,
                   ),
-                ),
-                SizedBox(height: Dimen.SPACE_X1),
-                BlocBuilder<TextFieldBloc, TextFieldState>(
-                  cubit: passwordBloc,
-                  builder: (_, state) => _TextField(
-                    initialValue: state.maybeWhen(
-                      orElse: () => '',
-                      normal: (value) => value,
+                  SizedBox(height: Dimen.SPACE_X3),
+                  BlocBuilder<TextFieldBloc, TextFieldState>(
+                    cubit: usernameBloc,
+                    builder: (_, state) => _TextField(
+                      initialValue: state.maybeWhen(
+                        orElse: () => '',
+                        normal: (value) => value,
+                      ),
+                      hintText: translate(I18n.TXT_USER_NAME),
+                      prefixIcon: Icon(
+                        Icons.email,
+                        color: AppColor.WHITE,
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      errorText: state.maybeWhen(
+                        orElse: () => null,
+                        error: (error) => error,
+                      ),
+                      onTextChange: (value) {
+                        usernameBloc.onTextChange(value);
+                      },
                     ),
-                    hintText: translate(I18n.TXT_PASSWORD),
-                    prefixIcon: Icon(
-                      Icons.fingerprint,
-                      color: AppColor.WHITE,
-                    ),
-                    keyboardType: TextInputType.text,
-                    obscureText: true,
-                    errorText: state.maybeWhen(
-                        orElse: () => null, error: (error) => error),
-                    onTextChange: (value) {
-                      passwordBloc.onTextChange(value);
-                    },
                   ),
-                ),
-                SizedBox(height: Dimen.SPACE_X3),
-                RoundedButton(
-                  label: translate(I18n.TXT_LOG_IN),
-                  backgroundColor: AppColor.TRANSPARENT,
-                  borderColor: AppColor.WHITE,
-                  labelColor: AppColor.WHITE,
-                  onPress: () {
-                    final username = usernameBloc.state.when(
-                      normal: (value) => value,
-                      error: (error) => null,
-                    );
+                  SizedBox(height: Dimen.SPACE_X1),
+                  BlocBuilder<TextFieldBloc, TextFieldState>(
+                    cubit: passwordBloc,
+                    builder: (_, state) => _TextField(
+                      initialValue: state.maybeWhen(
+                        orElse: () => '',
+                        normal: (value) => value,
+                      ),
+                      hintText: translate(I18n.TXT_PASSWORD),
+                      prefixIcon: Icon(
+                        Icons.fingerprint,
+                        color: AppColor.WHITE,
+                      ),
+                      keyboardType: TextInputType.text,
+                      obscureText: true,
+                      errorText: state.maybeWhen(
+                          orElse: () => null, error: (error) => error),
+                      onTextChange: (value) {
+                        passwordBloc.onTextChange(value);
+                      },
+                    ),
+                  ),
+                  SizedBox(height: Dimen.SPACE_X3),
+                  RoundedButton(
+                    label: translate(I18n.TXT_LOG_IN),
+                    backgroundColor: AppColor.TRANSPARENT,
+                    borderColor: AppColor.WHITE,
+                    labelColor: AppColor.WHITE,
+                    onPress: () {
+                      final username = usernameBloc.state.when(
+                        normal: (value) => value,
+                        error: (error) => null,
+                      );
 
-                    final password = passwordBloc.state.when(
-                      normal: (value) => value,
-                      error: (error) => null,
-                    );
+                      final password = passwordBloc.state.when(
+                        normal: (value) => value,
+                        error: (error) => null,
+                      );
 
-                    if (username != null && password != null) {
-                      log(username);
-                      log(password);
-                      if (username.isEmpty || password.isEmpty) {
-                        usernameBloc.onTextChange(username);
-                        passwordBloc.onTextChange(password);
-                      } else {
-                        loginBloc.login(
-                          username: username,
-                          password: password,
-                        );
+                      if (username != null && password != null) {
+                        if (username.isEmpty || password.isEmpty) {
+                          usernameBloc.onTextChange(username);
+                          passwordBloc.onTextChange(password);
+                        } else {
+                          loginBloc.login(
+                            username: username,
+                            password: password,
+                          );
+                        }
                       }
-                    }
-                  },
-                ),
-                SizedBox(height: Dimen.SPACE_X3),
-                Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    Container(
-                      height: 20,
-                      width: 2,
-                      color: Colors.white,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(right: 150),
-                      child: ClickableText(
-                        text: translate(I18n.TXT_FORGOT_PASSWORD),
-                        color: AppColor.WHITE,
-                        onPress: () => Navigator.pushNamed(
-                            context, ForgotPasswordScreen.route),
+                    },
+                  ),
+                  SizedBox(height: Dimen.SPACE_X3),
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Container(
+                        height: 20,
+                        width: 2,
+                        color: Colors.white,
                       ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.only(left: 80),
-                      child: ClickableText(
-                        text: translate(I18n.TXT_SIGN_UP),
-                        color: AppColor.WHITE,
-                        onPress: () =>
-                            Navigator.pushNamed(context, SignUpScreen.route),
+                      Container(
+                        margin: const EdgeInsets.only(right: 150),
+                        child: ClickableText(
+                          text: translate(I18n.TXT_FORGOT_PASSWORD),
+                          color: AppColor.WHITE,
+                          onPress: () => Navigator.pushNamed(
+                              context, ForgotPasswordScreen.route),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Spacer(),
-                ClickableImage(
-                  image: Image.asset(ImagePaths.IC_CALL),
-                  onPress: () async {
-                    const tel = 'tel:1800888811';
-                    if (await canLaunch(tel)) {
-                      launch(tel);
-                    }
-                  },
-                ),
-              ],
+                      Container(
+                        margin: const EdgeInsets.only(left: 80),
+                        child: ClickableText(
+                          text: translate(I18n.TXT_SIGN_UP),
+                          color: AppColor.WHITE,
+                          onPress: () =>
+                              Navigator.pushNamed(context, SignUpScreen.route),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  ClickableImage(
+                    image: Image.asset(ImagePaths.IC_CALL),
+                    onPress: () async {
+                      const tel = 'tel:1800888811';
+                      if (await canLaunch(tel)) {
+                        launch(tel);
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),

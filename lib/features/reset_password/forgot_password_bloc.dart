@@ -13,13 +13,16 @@ abstract class ForgotPasswordState with _$ForgotPasswordState {
 
   factory ForgotPasswordState.success(String message) = _Success;
 
-  factory ForgotPasswordState.loading() = _Loading;
+  const factory ForgotPasswordState.loading() = _Loading;
+
+  const factory ForgotPasswordState.initial() = _Initial;
 }
 
 class ForgotPasswordBloc extends BaseBloc<ForgotPasswordState> {
   final UserRepository _userRepository;
 
-  ForgotPasswordBloc(this._userRepository) : super(null);
+  ForgotPasswordBloc(this._userRepository)
+      : super(ForgotPasswordState.initial());
 
   void submit(String email) {
     emit(ForgotPasswordState.loading());
