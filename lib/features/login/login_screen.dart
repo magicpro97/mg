@@ -7,6 +7,7 @@ import 'package:flutter_statusbar_text_color/flutter_statusbar_text_color.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:mg/app_bloc.dart';
 import 'package:mg/core/hooks/text_field_bloc_hook.dart';
+import 'package:mg/core/utils/text_field_bloc_validator.dart';
 import 'package:mg/features/base_screen.dart';
 import 'package:mg/features/home/home_screen.dart';
 import 'package:mg/features/register/sign_up_screen.dart';
@@ -47,7 +48,17 @@ class LoginScreen extends HookWidget {
       (value) => value.isEmpty ? translate(I18n.MSG_REQUIRED_ERROR) : null,
     );
 
-    void _submit() {}
+    void _submit() {
+      final isValid =
+          TextFieldBlocValidator.validate([emailBloc, passwordBloc]);
+
+      if (isValid) {
+        loginBloc.login(
+          username: emailBloc.value,
+          password: passwordBloc.value,
+        );
+      }
+    }
 
     return BlocListener<LoginBloc, LoginState>(
       cubit: loginBloc,
