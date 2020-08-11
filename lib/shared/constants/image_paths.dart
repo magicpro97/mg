@@ -38,4 +38,6 @@ class ImagePaths {
   static const IC_CANCEL = '$IMAGE_ASSETS/cancelling.png';
 
   static const BG_ACCOUNT = '$IMAGE_ASSETS/bg.png';
+
+  static const IC_SOS_CALL = '$IMAGE_ASSETS/sos_ic_touch.png';
 }

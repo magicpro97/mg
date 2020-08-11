@@ -7,7 +7,7 @@ class AppColor {
 
   static const TRANSPARENT = Colors.transparent;
 
-  static const PRIMARY = Color(0xFFFFC20F);
+  static const PRIMARY = Color(0xFF252424);
 
   static const GRAY_F9F9F9 = Color(0xFFF9F9F9);
 

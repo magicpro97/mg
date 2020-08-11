@@ -18,7 +18,6 @@ class SignUpScreen extends StatelessWidget {
       leading: IconButton(
         icon: Icon(
           Icons.close,
-          color: AppColor.BLACK,
         ),
         onPressed: () => Navigator.pop(context),
       ),
@@ -26,7 +25,6 @@ class SignUpScreen extends StatelessWidget {
         IconButton(
           icon: Icon(
             Icons.done,
-            color: AppColor.BLACK,
           ),
           onPressed: () {},
         ),
@@ -34,7 +32,6 @@ class SignUpScreen extends StatelessWidget {
       child: SafeArea(
         bottom: false,
         child: Container(
-          color: AppColor.PRIMARY,
           padding: const EdgeInsets.symmetric(horizontal: Dimen.SPACE_X2),
           child: _registerForm(context),
         ),
