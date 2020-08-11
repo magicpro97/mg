@@ -11,7 +11,9 @@ class UnderlineTextFieldBlocBuilder extends StatelessWidget {
   final TextInputType keyboardType;
   final bool obscureText;
   final Color underlineColor;
+  final Function(String) onFieldSubmitted;
   final List<TextInputFormatter> inputFormatters;
+  final TextInputAction textInputAction;
 
   const UnderlineTextFieldBlocBuilder({
     Key key,
@@ -22,6 +24,8 @@ class UnderlineTextFieldBlocBuilder extends StatelessWidget {
     this.obscureText = false,
     this.underlineColor,
     this.inputFormatters,
+    this.onFieldSubmitted,
+    this.textInputAction,
   }) : super(key: key);
 
   @override
@@ -40,6 +44,8 @@ class UnderlineTextFieldBlocBuilder extends StatelessWidget {
           error: (error) => error,
         ),
         inputFormatters: inputFormatters,
+        onFieldSubmitted: onFieldSubmitted,
+        textInputAction: textInputAction,
       ),
     );
   }

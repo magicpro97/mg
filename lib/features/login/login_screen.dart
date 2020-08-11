@@ -6,7 +6,6 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_statusbar_text_color/flutter_statusbar_text_color.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:mg/app_bloc.dart';
-import 'package:mg/core/bloc/text_field_bloc.dart';
 import 'package:mg/core/hooks/text_field_bloc_hook.dart';
 import 'package:mg/features/base_screen.dart';
 import 'package:mg/features/home/home_screen.dart';
@@ -14,11 +13,11 @@ import 'package:mg/features/register/sign_up_screen.dart';
 import 'package:mg/features/reset_password/forgot_password_screen.dart';
 import 'package:mg/i18n/i18n.dart';
 import 'package:mg/shared/constants/image_paths.dart';
+import 'package:mg/shared/widgets/builders/underline_text_field_bloc_builder.dart';
 import 'package:mg/shared/widgets/buttons/rounded_button.dart';
 import 'package:mg/shared/widgets/clickable_image.dart';
 import 'package:mg/shared/widgets/clickable_text.dart';
 import 'package:mg/shared/widgets/dialogs/common_error_dialog.dart';
-import 'package:mg/shared/widgets/text_fields/underline_text_field.dart';
 import 'package:mg/style/color.dart';
 import 'package:mg/style/dimen.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,12 +40,14 @@ class LoginScreen extends HookWidget {
     final loginBloc = context.bloc<LoginBloc>();
     final appBloc = context.bloc<AppBloc>();
 
-    final usernameBloc = useTextFieldBloc(
-          (value) => value.isEmpty ? translate(I18n.MSG_REQUIRED_ERROR) : null,
+    final emailBloc = useTextFieldBloc(
+      (value) => value.isEmpty ? translate(I18n.MSG_REQUIRED_ERROR) : null,
     );
     final passwordBloc = useTextFieldBloc(
-          (value) => value.isEmpty ? translate(I18n.MSG_REQUIRED_ERROR) : null,
+      (value) => value.isEmpty ? translate(I18n.MSG_REQUIRED_ERROR) : null,
     );
+
+    void _submit() {}
 
     return BlocListener<LoginBloc, LoginState>(
       cubit: loginBloc,
@@ -88,42 +89,28 @@ class LoginScreen extends HookWidget {
                         height: 150,
                       ),
                       SizedBox(height: Dimen.SPACE_X3),
-                      BlocBuilder<TextFieldBloc, TextFieldState>(
-                        cubit: usernameBloc,
-                        builder: (_, state) =>
-                            _TextField(
-                              hintText: translate(I18n.TXT_USER_NAME),
-                              prefixIcon: Icon(
-                                Icons.email,
-                                color: AppColor.WHITE,
-                              ),
-                              keyboardType: TextInputType.emailAddress,
-                              errorText: state.maybeWhen(
-                                orElse: () => null,
-                                error: (error) => error,
-                              ),
-                              onTextChange: (value) {
-                                usernameBloc.onTextChange(value);
-                              },
-                            ),
+                      UnderlineTextFieldBlocBuilder(
+                        bloc: emailBloc,
+                        hint: translate(I18n.TXT_EMAIL_ADDRESS),
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        prefixIcon: Icon(
+                          Icons.email,
+                          color: AppColor.WHITE,
+                        ),
                       ),
                       SizedBox(height: Dimen.SPACE_X1),
-                      BlocBuilder<TextFieldBloc, TextFieldState>(
-                        cubit: passwordBloc,
-                        builder: (_, state) =>
-                            _TextField(
-                              hintText: translate(I18n.TXT_PASSWORD),
-                              prefixIcon: Icon(
-                                Icons.fingerprint,
-                                color: AppColor.WHITE,
-                              ),
-                              keyboardType: TextInputType.text,
-                              obscureText: true,
-                              errorText: state.maybeWhen(
-                                  orElse: () => null, error: (error) => error),
-                              onTextChange:
-                              passwordBloc.onTextChange,
-                            ),
+                      UnderlineTextFieldBlocBuilder(
+                        bloc: passwordBloc,
+                        hint: translate(I18n.TXT_PASSWORD),
+                        keyboardType: TextInputType.visiblePassword,
+                        textInputAction: TextInputAction.done,
+                        obscureText: true,
+                        prefixIcon: Icon(
+                          Icons.fingerprint,
+                          color: AppColor.WHITE,
+                        ),
+                        onFieldSubmitted: (_) => _submit(),
                       ),
                       SizedBox(height: Dimen.SPACE_X3),
                       RoundedButton(
@@ -131,29 +118,7 @@ class LoginScreen extends HookWidget {
                         backgroundColor: AppColor.TRANSPARENT,
                         borderColor: AppColor.WHITE,
                         labelColor: AppColor.WHITE,
-                        onPress: () {
-                          final username = usernameBloc.state.when(
-                            normal: (value) => value,
-                            error: (error) => null,
-                          );
-
-                          final password = passwordBloc.state.when(
-                            normal: (value) => value,
-                            error: (error) => null,
-                          );
-
-                          if (username != null && password != null) {
-                            if (username.isEmpty || password.isEmpty) {
-                              usernameBloc.onTextChange(username);
-                              passwordBloc.onTextChange(password);
-                            } else {
-                              loginBloc.login(
-                                username: username,
-                                password: password,
-                              );
-                            }
-                          }
-                        },
+                        onPress: _submit,
                       ),
                       SizedBox(height: Dimen.SPACE_X3),
                       Stack(
@@ -202,44 +167,6 @@ class LoginScreen extends HookWidget {
               ),
             ),
       ),
-    );
-  }
-}
-
-class _TextField extends StatelessWidget {
-  final String hintText;
-  final Widget prefixIcon;
-  final TextInputType keyboardType;
-  final bool obscureText;
-  final String errorText;
-  final Function(String) onTextChange;
-  final TextEditingController controller;
-
-  const _TextField({
-    Key key,
-    @required this.hintText,
-    @required this.prefixIcon,
-    @required this.keyboardType,
-    this.obscureText = false,
-    this.errorText,
-    @required this.onTextChange,
-    this.controller,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return UnderlineTextField(
-      key: key,
-      contentTextStyle: TextStyle(color: AppColor.WHITE),
-      hintText: hintText,
-      hintTextStyle: TextStyle(color: AppColor.WHITE),
-      keyboardType: keyboardType,
-      obscureText: obscureText,
-      underlineColor: AppColor.WHITE,
-      prefixIcon: prefixIcon,
-      errorText: errorText,
-      onTextChange: onTextChange,
-      controller: controller,
     );
   }
 }

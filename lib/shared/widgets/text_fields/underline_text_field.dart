@@ -11,11 +11,13 @@ class UnderlineTextField extends StatelessWidget {
   final bool obscureText;
   final Color underlineColor;
   final Function(String) onTextChange;
+  final Function(String) onFieldSubmitted;
   final String Function(String) validator;
   final TextEditingController controller;
   final String errorText;
   final String initialValue;
   final List<TextInputFormatter> inputFormatters;
+  final TextInputAction textInputAction;
 
   const UnderlineTextField({
     this.key,
@@ -32,6 +34,8 @@ class UnderlineTextField extends StatelessWidget {
     this.errorText,
     this.initialValue,
     this.inputFormatters,
+    this.onFieldSubmitted,
+    this.textInputAction,
   }) : super(key: key);
 
   @override
@@ -59,6 +63,8 @@ class UnderlineTextField extends StatelessWidget {
       validator: validator,
       controller: controller,
       inputFormatters: inputFormatters,
+      onFieldSubmitted: onFieldSubmitted,
+      textInputAction: textInputAction,
     );
   }
 }
