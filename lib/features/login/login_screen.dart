@@ -19,7 +19,7 @@ import 'package:mg/shared/constants/image_paths.dart';
 import 'package:mg/shared/widgets/buttons/rounded_button.dart';
 import 'package:mg/shared/widgets/clickable_image.dart';
 import 'package:mg/shared/widgets/clickable_text.dart';
-import 'package:mg/shared/widgets/dialogs/error_dialog.dart';
+import 'package:mg/shared/widgets/dialogs/common_error_dialog.dart';
 import 'package:mg/shared/widgets/text_fields/underline_text_field.dart';
 import 'package:mg/style/color.dart';
 import 'package:mg/style/dimen.dart';
@@ -63,13 +63,11 @@ class LoginScreen extends HookWidget {
               EasyLoading.dismiss();
 
               showDialog(
-                  context: context,
-                  child: ErrorDialog(
-                    title: translate(I18n.TXT_ERROR),
-                    content: message ?? translate(I18n.MGS_SERVER_ERROR),
-                    negativeLabel: translate(I18n.TXT_CLOSE),
-                    onNegativePressed: () => Navigator.pop(context),
-                  ));
+                context: context,
+                child: CommonErrorDialog(
+                  message: message,
+                ),
+              );
             },
             loading: () {
               EasyLoading.show();

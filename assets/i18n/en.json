@@ -53,5 +53,7 @@
   "txt_request_assistance": "Request Assistance",
   "txt_input_current_location": "Input Current Location",
   "mgs_server_error": "Cannot connect to server. Please try again.",
-  "txt_close": "Close"
+  "txt_close": "Close",
+  "txt_success": "Success",
+  "txt_ok": "OK"
 }

@@ -28,18 +28,18 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     var localizationDelegate = LocalizedApp.of(context).delegate;
 
-    return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider<UserRepository>.value(value: userRepository),
-        RepositoryProvider<TokenRepository>.value(value: tokenRepository),
-      ],
-      child: MultiBlocProvider(
+    return FlutterEasyLoading(
+      child: MultiRepositoryProvider(
         providers: [
-          BlocProvider<AppBloc>.value(value: appBloc),
+          RepositoryProvider<UserRepository>.value(value: userRepository),
+          RepositoryProvider<TokenRepository>.value(value: tokenRepository),
         ],
-        child: LocalizationProvider(
-          state: LocalizationProvider.of(context).state,
-          child: FlutterEasyLoading(
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<AppBloc>.value(value: appBloc),
+          ],
+          child: LocalizationProvider(
+            state: LocalizationProvider.of(context).state,
             child: MaterialApp(
               title: translate(I18n.APP_NAME),
               theme: AppTheme.defaultTheme,

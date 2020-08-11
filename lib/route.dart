@@ -4,6 +4,7 @@ import 'package:mg/core/providers/async_bloc_provider.dart';
 import 'package:mg/core/route/platform_page_route.dart';
 import 'package:mg/features/login/login_bloc.dart';
 import 'package:mg/features/request_assistance/request_assistance_screen.dart';
+import 'package:mg/features/reset_password/forgot_password_bloc.dart';
 import 'package:mg/injector_container.dart';
 
 import 'features/account/account_screen.dart';
@@ -57,7 +58,10 @@ RouteFactory routes() {
         screen = ChangePasswordScreen();
         break;
       case ForgotPasswordScreen.route:
-        screen = ForgotPasswordScreen();
+        screen = BlocProvider(
+          create: (_) => ForgotPasswordBloc(getIt.get()),
+          child: ForgotPasswordScreen(),
+        );
         break;
       case FeedbackScreen.route:
         screen = FeedbackScreen();
