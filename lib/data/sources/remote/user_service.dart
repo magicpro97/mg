@@ -25,7 +25,7 @@ class UserServiceImpl extends UserService {
   }) =>
       _dio
           .post(
-            Api.SYSTEM_LOGIN,
+            UserApi.systemLogin,
             data: {
               'userLogin': username,
               'password': password,
@@ -42,10 +42,10 @@ class UserServiceImpl extends UserService {
   @override
   Future<Result> forgotPassword(String email) => _dio
       .post(
-        Api.FORGOT_PASSWORD,
-        data: {
-          'email': email,
-        },
+    UserApi.forgotPassword,
+    data: {
+      'email': email,
+    },
       )
       .then((value) => ResponseParser.fromJson(value.data).data)
       .catchError((error) => error);
@@ -55,13 +55,13 @@ class UserServiceImpl extends UserService {
           {String username, String password, String phone, String email}) =>
       _dio
           .post(
-            Api.REGISTER,
-            data: {
-              'userName': username,
-              'password': password,
-              'userMobile': phone,
-              'userEmail': email,
-            },
+        UserApi.systemLogin,
+        data: {
+          'userName': username,
+          'password': password,
+          'userMobile': phone,
+          'userEmail': email,
+        },
           )
           .then((value) => ResponseParser.fromJson(
                 value.data,

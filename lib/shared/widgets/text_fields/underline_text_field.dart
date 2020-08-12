@@ -46,13 +46,18 @@ class UnderlineTextField extends StatelessWidget {
       style: contentTextStyle,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: hintTextStyle,
+        hintStyle: hintTextStyle?.copyWith(color: underlineColor) ?? null,
         prefixIcon: prefixIcon,
         errorText: errorText,
         enabledBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: underlineColor ?? Colors.black),
+          borderSide: BorderSide(
+              color: underlineColor?.withOpacity(.5) ?? Colors.black),
         ),
         border: UnderlineInputBorder(
+          borderSide: BorderSide(
+              color: underlineColor?.withOpacity(.5) ?? Colors.black),
+        ),
+        focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: underlineColor ?? Colors.black),
         ),
         errorMaxLines: 2,

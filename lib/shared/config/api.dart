@@ -1,13 +1,23 @@
- class Api {
-  static const BASE_URL = 'https://mgcenter.rsaprovider.tk';
+import 'package:mg/shared/config/env.dart';
 
-  static const WEB_SERVICE_URL = '$BASE_URL/cms-mobile/api';
+class Api {
+  static final env = Env.env;
 
-  static const SYSTEM_LOGIN = '$WEB_SERVICE_URL/login/userReg';
+  static final baseUrl = env == BuildEnv.DEV
+      ? 'https://mgcenter.rsaprovider.tk'
+      : 'https://tcsv.tanchonggroup.com';
 
-  static const USER = '$WEB_SERVICE_URL/user';
+  static final cmsUrl = '$baseUrl/cms-mobile/api';
 
-  static const FORGOT_PASSWORD = '$USER/forgotpassword';
+  static final userApi = '$cmsUrl/user';
+}
 
-  static const REGISTER = '$USER/register';
+class UserApi {
+  static final baseUrl = Api.userApi;
+
+  static final forgotPassword = '$baseUrl/forgotpassword';
+
+  static final register = '$baseUrl/register';
+
+  static final systemLogin = '${Api.cmsUrl}/login/userReg';
 }

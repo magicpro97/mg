@@ -80,17 +80,19 @@ class LoginScreen extends HookWidget {
       },
       child: BlocBuilder<LoginBloc, LoginState>(
         cubit: context.bloc<LoginBloc>(),
-        builder: (_, state) =>
-            BaseScreen(
-              showAppbar: false,
-              isLoading: state.maybeWhen(
-                orElse: () => false,
-                loading: () => true,
-              ),
-              child: Container(
-                color: AppColor.PRIMARY,
-                padding: const EdgeInsets.symmetric(horizontal: Dimen.SPACE_X2),
-                child: SafeArea(
+        builder: (_, state) => BaseScreen(
+          showAppbar: false,
+          isLoading: state.maybeWhen(
+            orElse: () => false,
+            loading: () => true,
+          ),
+          child: Container(
+            color: AppColor.PRIMARY,
+            padding: const EdgeInsets.symmetric(horizontal: Dimen.SPACE_X2),
+            child: SafeArea(
+              child: SingleChildScrollView(
+                child: Container(
+                  height: MediaQuery.of(context).size.height,
                   child: Column(
                     children: <Widget>[
                       SizedBox(height: Dimen.SPACE_X3),
@@ -109,6 +111,8 @@ class LoginScreen extends HookWidget {
                           Icons.email,
                           color: AppColor.WHITE,
                         ),
+                        underlineColor: AppColor.WHITE,
+                        contentTextStyle: TextStyle(color: AppColor.WHITE),
                       ),
                       SizedBox(height: Dimen.SPACE_X1),
                       UnderlineTextFieldBlocBuilder(
@@ -121,7 +125,9 @@ class LoginScreen extends HookWidget {
                           Icons.fingerprint,
                           color: AppColor.WHITE,
                         ),
+                        underlineColor: AppColor.WHITE,
                         onFieldSubmitted: (_) => _submit(),
+                        contentTextStyle: TextStyle(color: AppColor.WHITE),
                       ),
                       SizedBox(height: Dimen.SPACE_X3),
                       RoundedButton(
@@ -145,9 +151,8 @@ class LoginScreen extends HookWidget {
                             child: ClickableText(
                               text: translate(I18n.TXT_FORGOT_PASSWORD),
                               color: AppColor.WHITE,
-                              onPress: () =>
-                                  Navigator.pushNamed(
-                                      context, ForgotPasswordScreen.route),
+                              onPress: () => Navigator.pushNamed(
+                                  context, ForgotPasswordScreen.route),
                             ),
                           ),
                           Container(
@@ -155,9 +160,8 @@ class LoginScreen extends HookWidget {
                             child: ClickableText(
                               text: translate(I18n.TXT_SIGN_UP),
                               color: AppColor.WHITE,
-                              onPress: () =>
-                                  Navigator.pushNamed(
-                                      context, SignUpScreen.route),
+                              onPress: () => Navigator.pushNamed(
+                                  context, SignUpScreen.route),
                             ),
                           ),
                         ],
@@ -177,6 +181,8 @@ class LoginScreen extends HookWidget {
                 ),
               ),
             ),
+          ),
+        ),
       ),
     );
   }

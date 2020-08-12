@@ -43,7 +43,7 @@ void setUpDio() {
   getIt.registerLazySingleton(() {
     final dio = Dio(
       BaseOptions(
-        baseUrl: Api.BASE_URL,
+        baseUrl: Api.baseUrl,
       ),
     );
 

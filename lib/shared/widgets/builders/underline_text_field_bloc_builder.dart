@@ -14,6 +14,7 @@ class UnderlineTextFieldBlocBuilder extends StatelessWidget {
   final Function(String) onFieldSubmitted;
   final List<TextInputFormatter> inputFormatters;
   final TextInputAction textInputAction;
+  final TextStyle contentTextStyle;
 
   const UnderlineTextFieldBlocBuilder({
     Key key,
@@ -26,6 +27,7 @@ class UnderlineTextFieldBlocBuilder extends StatelessWidget {
     this.inputFormatters,
     this.onFieldSubmitted,
     this.textInputAction,
+    this.contentTextStyle,
   }) : super(key: key);
 
   @override
@@ -46,6 +48,8 @@ class UnderlineTextFieldBlocBuilder extends StatelessWidget {
         inputFormatters: inputFormatters,
         onFieldSubmitted: onFieldSubmitted,
         textInputAction: textInputAction,
+        hintTextStyle: TextStyle(),
+        contentTextStyle: contentTextStyle,
       ),
     );
   }
